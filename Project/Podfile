@@ -1,7 +1,7 @@
-pod "EEEInjector", :path => "../EEEInjector.podspec"
-
-target "Demo" do
+target "EEEInjector" do
+  pod "EEEInterventions", :path => "../"
 end
 
-target "DemoTests" do
+target "EEEInjectorTests" do
+  pod "Kiwi/XCTest"
 end
