@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "TTTDIConcreteSingleton.h"
+#import <Foundation/Foundation.h>
 
-@implementation TTTDIConcreteSingleton
+@interface EEEDIBaseSingleton : NSObject
 
 @end

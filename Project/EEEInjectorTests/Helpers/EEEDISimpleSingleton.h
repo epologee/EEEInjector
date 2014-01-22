@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "TTTDISimpleObject.h"
+#import <Foundation/Foundation.h>
 
-@implementation TTTDISimpleObject 
+@interface EEEDISimpleSingleton : NSObject
 
 @end

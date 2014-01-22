@@ -20,54 +20,54 @@
 
 #import <Foundation/Foundation.h>
 
-@class TTTInjectionMapping;
+@class EEEInjectionMapping;
 
-@protocol TTInjectionMappingEnd
+@protocol EEEInjectionMappingEnd
 
 - (void)singleServing;
 
 @end
 
-@protocol TTTInjectionMapping <TTInjectionMappingEnd>
+@protocol EEEInjectionMapping <EEEInjectionMappingEnd>
 
-- (id <TTInjectionMappingEnd>)allocOnly;
+- (id <EEEInjectionMappingEnd>)allocOnly;
 
 - (void)asSingleton;
 
 @end
 
-@protocol TTTInjectionMappingStart <TTTInjectionMapping>
+@protocol EEEInjectionMappingStart <EEEInjectionMapping>
 
-- (id <TTTInjectionMapping>)toSubclass:(Class)class;
+- (id <EEEInjectionMapping>)toSubclass:(Class)class;
 
-- (id <TTInjectionMappingEnd>)toObject:(id)object;
+- (id <EEEInjectionMappingEnd>)toObject:(id)object;
 
-typedef id (^TTTInjectionBlock)();
-- (id <TTInjectionMappingEnd>)toBlock:(TTTInjectionBlock)block;
+typedef id (^EEEInjectionBlock)();
+- (id <EEEInjectionMappingEnd>)toBlock:(EEEInjectionBlock)block;
 
 @end
 
 typedef enum
 {
-	TTTerminationOptionNone = 0,
-	TTTerminationOptionSingleServing = 1 << 0, // unmap after calling `object` or `targetClass`.
-	TTTerminationOptionSingleton = 1 << 1, // alloc/init singleton. The opposite performs alloc/init every time.
-	TTTerminationOptionAllocOnly = 1 << 2 // object can't be called on a mapping like this.
-} TTTerminationOption;
+	EEETerminationOptionNone = 0,
+	EEETerminationOptionSingleServing = 1 << 0, // unmap after calling `object` or `targetClass`.
+	EEETerminationOptionSingleton = 1 << 1, // alloc/init singleton. The opposite performs alloc/init every time.
+	EEETerminationOptionAllocOnly = 1 << 2 // object can't be called on a mapping like this.
+} EEETerminationOption;
 
-@protocol TTInjectionMappingParent <NSObject>
+@protocol EEEInjectionMappingParent <NSObject>
 
-- (void)removeChildMapping:(TTTInjectionMapping *)mapping;
+- (void)removeChildMapping:(EEEInjectionMapping *)mapping;
 
 @end
 
-@interface TTTInjectionMapping : NSObject <TTTInjectionMappingStart, TTInjectionMappingParent>
+@interface EEEInjectionMapping : NSObject <EEEInjectionMappingStart, EEEInjectionMappingParent>
 
 @property (nonatomic, strong, readonly) Class targetClass;
 @property (nonatomic, strong, readonly) id targetObject;
 @property (nonatomic, strong, readonly) NSMutableDictionary *injectables;
 
-- (id)initWithParent:(id <TTInjectionMappingParent>)parent mappedClass:(Class)mappedClass options:(TTTerminationOption)options;
+- (id)initWithParent:(id <EEEInjectionMappingParent>)parent mappedClass:(Class)mappedClass options:(EEETerminationOption)options;
 
 @end
 

@@ -18,15 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import "TTTInjector.h"
+#import "EEEDIBaseObject.h"
 
-@class TTTDISimpleObject;
-
-@interface TTTDIInjectableObject : NSObject <TTTInjectable>
-
-@property (nonatomic, strong) TTTDISimpleObject <TTTInjectable>*simpleInjectedObject;
-@property (nonatomic, strong) TTTDISimpleObject *simpleNotInjectedObject;
-@property (nonatomic, strong) NSArray <TTTInjectable>*simpleList;
+@interface EEEDIConcreteObject : EEEDIBaseObject
 
 @end

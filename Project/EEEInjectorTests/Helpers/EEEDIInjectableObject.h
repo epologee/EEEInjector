@@ -19,8 +19,14 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "TTTInjector.h"
+#import "EEEInjector.h"
 
-@interface TTTDISimpleObject : NSObject <TTTInjectable>
+@class EEEDISimpleObject;
+
+@interface EEEDIInjectableObject : NSObject <EEEInjectable>
+
+@property (nonatomic, strong) EEEDISimpleObject <EEEInjectable>*simpleInjectedObject;
+@property (nonatomic, strong) EEEDISimpleObject *simpleNotInjectedObject;
+@property (nonatomic, strong) NSArray <EEEInjectable>*simpleList;
 
 @end

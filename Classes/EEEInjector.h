@@ -19,28 +19,28 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "TTTInjectionMapping.h"
+#import "EEEInjectionMapping.h"
 
-#define injectClass ttt_classWithInjector:[TTTInjector currentInjector]
-#define injectAlloc ttt_allocWithInjector:[TTTInjector currentInjector]
-#define injectObject ttt_objectFromInjector:[TTTInjector currentInjector]
-#define injectObjectNamed(name) ttt_objectFromInjector:[TTTInjector currentInjector] withIdentifier:name
-#define inject ttt_injectWithInjector:[TTTInjector currentInjector]
+#define injectClass eee_classWithInjector:[EEEInjector currentInjector]
+#define injectAlloc eee_allocWithInjector:[EEEInjector currentInjector]
+#define injectObject eee_objectFromInjector:[EEEInjector currentInjector]
+#define injectObjectNamed(name) eee_objectFromInjector:[EEEInjector currentInjector] withIdentifier:name
+#define inject eee_injectWithInjector:[EEEInjector currentInjector]
 
 /**
- The TTTInjectable protocol is used to 'mark' properties to be injected automatically.
+ The EEEInjectable protocol is used to 'mark' properties to be injected automatically.
  The injected objects need not implement the protocol explicitly.
  You can, for example, inject an array property like this:
- @property (strong) NSArray <TTTInjectable>*plants;
+ @property (strong) NSArray <EEEInjectable>*plants;
  */
-@protocol TTTInjectable <NSObject>
+@protocol EEEInjectable <NSObject>
 
 @optional
 - (void)didInjectProperties;
 
 @end
 
-@class TTTInjector;
+@class EEEInjector;
 
 /**
  This mapper protocol is used to narrow down the methods you call on the injector directly.
@@ -50,29 +50,29 @@
  [[[self.injector mapClass:[CustomClass class]] toObject:[CustomSubclass]] singleServing];
  [[self.injector mapClass:[NSArray class] withIdentifier:@"plants"] toObject:@[@"Tree", @"Grass"]];
  */
-@protocol TTTInjectionMapper
+@protocol EEEInjectionMapper
 
-- (id <TTTInjectionMappingStart>)mapClass:(Class)class;
+- (id <EEEInjectionMappingStart>)mapClass:(Class)class;
 
-- (id <TTTInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier;
+- (id <EEEInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier;
 
-- (id <TTTInjectionMappingStart>)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting;
+- (id <EEEInjectionMappingStart>)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting;
 
-- (id <TTTInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting;
+- (id <EEEInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting;
 
 - (void)unmapClass:(Class)class;
 
 - (void)unmapClass:(Class)class withIdentifier:(NSString *)identifier;
 
-- (TTTInjector *)asInjector;
+- (EEEInjector *)asInjector;
 
 @end
 
 /**
- The TTTInjector public interface only deals with class methods for setting and getting a/the shared injector.
+ The EEEInjector public interface only deals with class methods for setting and getting a/the shared injector.
  You can manually keep a reference to one or more injector instances if you prefer.
  */
-@interface TTTInjector : NSObject <TTTInjectionMapper>
+@interface EEEInjector : NSObject <EEEInjectionMapper>
 
 @property(nonatomic) BOOL allowImplicitMapping;
 
@@ -80,15 +80,15 @@
 
 + (instancetype)defaultCurrentInjector;
 
-+ (instancetype)setCurrentInjector:(TTTInjector *)injector force:(BOOL)force;
++ (instancetype)setCurrentInjector:(EEEInjector *)injector force:(BOOL)force;
 
-+ (TTTInjector *)sharedInjector DEPRECATED_ATTRIBUTE; // Replaced by currentInjector
++ (EEEInjector *)sharedInjector DEPRECATED_ATTRIBUTE; // Replaced by currentInjector
 
-+ (TTTInjector *)setSharedInjector DEPRECATED_ATTRIBUTE; // Replaced by defaultCurrentInjector
++ (EEEInjector *)setSharedInjector DEPRECATED_ATTRIBUTE; // Replaced by defaultCurrentInjector
 
-+ (TTTInjector *)setSharedInjector:(TTTInjector *)injector DEPRECATED_ATTRIBUTE; // Replaced by setCurrentInjector:force:
++ (EEEInjector *)setSharedInjector:(EEEInjector *)injector DEPRECATED_ATTRIBUTE; // Replaced by setCurrentInjector:force:
 
-- (id <TTTInjectionMapper>)asMapper;
+- (id <EEEInjectionMapper>)asMapper;
 
 - (id)injectPropertiesIntoObject:(id)object;
 
@@ -98,7 +98,7 @@
  Retrieve mapped classes, objects or manually fire injection with these NSObject methods.
  Example:
  
-    [[CustomClass ttt_allocWithInjector:[TTTInjector sharedInjector]] initWithFrame:CGRectZero];
+    [[CustomClass eee_allocWithInjector:[EEEInjector sharedInjector]] initWithFrame:CGRectZero];
  
  There's a shorthand macro for this above, so you if you use the sharedInjector, you may write:
  
@@ -106,22 +106,22 @@
  
  Or try identifier-based mappings:
  
-    [NSArray ttt_objectFromInjector:[TTTInjector sharedInjector] withIdentifier:@"plants"];
+    [NSArray eee_objectFromInjector:[EEEInjector sharedInjector] withIdentifier:@"plants"];
  
  If objects are mapped with an identifier, properties that share that name will be automatically injected:
  
-    @property (strong) NSArray <TTTInjectable>*plants;
+    @property (strong) NSArray <EEEInjectable>*plants;
  */
-@interface NSObject (TTTInjector)
+@interface NSObject (EEEInjector)
 
-+ (Class)ttt_classWithInjector:(TTTInjector *)injector;
++ (Class)eee_classWithInjector:(EEEInjector *)injector;
 
-+ (instancetype)ttt_allocWithInjector:(TTTInjector *)injector;
++ (instancetype)eee_allocWithInjector:(EEEInjector *)injector;
 
-+ (instancetype)ttt_objectFromInjector:(TTTInjector *)injector;
++ (instancetype)eee_objectFromInjector:(EEEInjector *)injector;
 
-+ (instancetype)ttt_objectFromInjector:(TTTInjector *)injector withIdentifier:(NSString *)identifier;
++ (instancetype)eee_objectFromInjector:(EEEInjector *)injector withIdentifier:(NSString *)identifier;
 
-- (instancetype)ttt_injectWithInjector:(TTTInjector *)injector;
+- (instancetype)eee_injectWithInjector:(EEEInjector *)injector;
 
 @end

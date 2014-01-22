@@ -21,7 +21,7 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
-@interface TTTIntrospectProperty : NSObject
+@interface EEEIntrospectProperty : NSObject
 
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *typeEncoding;

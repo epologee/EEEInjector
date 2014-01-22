@@ -18,8 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <XCTest/XCTest.h>
+#import <Foundation/Foundation.h>
+#import "EEEInjector.h"
 
-@interface TTTDependencyInjectionTestCase : XCTestCase
+@interface EEEDISimpleObject : NSObject <EEEInjectable>
 
 @end

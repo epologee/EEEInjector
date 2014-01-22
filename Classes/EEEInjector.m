@@ -18,18 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "TTTInjector.h"
-#import "TTTIntrospectProperty.h"
+#import "EEEInjector.h"
+#import "EEEIntrospectProperty.h"
 
-static TTTInjector *_currentInjector;
+static EEEInjector *_currentInjector;
 
-@interface TTTInjector () <TTInjectionMappingParent>
+@interface EEEInjector () <EEEInjectionMappingParent>
 
 @property(nonatomic, strong) NSMutableDictionary *classMappings;
 
 @end
 
-@implementation TTTInjector
+@implementation EEEInjector
 
 + (instancetype)currentInjector
 {
@@ -41,7 +41,7 @@ static TTTInjector *_currentInjector;
     return [self setCurrentInjector:[[self alloc] init] force:NO];
 }
 
-+ (instancetype)setCurrentInjector:(TTTInjector *)injector force:(BOOL)force
++ (instancetype)setCurrentInjector:(EEEInjector *)injector force:(BOOL)force
 {
     @synchronized (self)
     {
@@ -55,17 +55,17 @@ static TTTInjector *_currentInjector;
     return _currentInjector;
 }
 
-+ (TTTInjector *)sharedInjector
++ (EEEInjector *)sharedInjector
 {
     return [self currentInjector];
 }
 
-+ (TTTInjector *)setSharedInjector
++ (EEEInjector *)setSharedInjector
 {
     return [self setSharedInjector:[[self alloc] init]];
 }
 
-+ (TTTInjector *)setSharedInjector:(TTTInjector *)injector
++ (EEEInjector *)setSharedInjector:(EEEInjector *)injector
 {
     @synchronized (self)
     {
@@ -103,29 +103,29 @@ static TTTInjector *_currentInjector;
     return self;
 }
 
-- (id <TTTInjectionMapper>)asMapper
+- (id <EEEInjectionMapper>)asMapper
 {
     return self;
 }
 
 #pragma mark - Mapping protocols and classes
 
-- (id <TTTInjectionMappingStart>)mapClass:(Class)class
+- (id <EEEInjectionMappingStart>)mapClass:(Class)class
 {
     return [self mapClass:class withIdentifier:nil];
 }
 
-- (id <TTTInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier
+- (id <EEEInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier
 {
     return [self mapClass:class withIdentifier:identifier overwriteExisting:NO];
 }
 
-- (id <TTTInjectionMappingStart>)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting
+- (id <EEEInjectionMappingStart>)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting
 {
     return [self mapClass:class withIdentifier:nil overwriteExisting:overwriteExisting];
 }
 
-- (id <TTTInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting
+- (id <EEEInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting
 {
     NSString *key = [[self class] keyForClass:class withIdentifier:identifier];
 
@@ -134,7 +134,7 @@ static TTTInjector *_currentInjector;
         NSAssert([self.classMappings objectForKey:key] == nil, @"Attempted duplicate mapping for key %@", key);
     }
 
-    TTTInjectionMapping *mapping = [[TTTInjectionMapping alloc] initWithParent:self mappedClass:class options:TTTerminationOptionNone];
+    EEEInjectionMapping *mapping = [[EEEInjectionMapping alloc] initWithParent:self mappedClass:class options:EEETerminationOptionNone];
     self.classMappings[key] = mapping;
 
     return mapping;
@@ -153,9 +153,9 @@ static TTTInjector *_currentInjector;
     [self.classMappings removeObjectForKey:key];
 }
 
-- (void)removeChildMapping:(TTTInjectionMapping *)mapping
+- (void)removeChildMapping:(EEEInjectionMapping *)mapping
 {
-    [self.classMappings enumerateKeysAndObjectsUsingBlock:^(NSString *key, TTTInjectionMapping *existingMapping, BOOL *stop) {
+    [self.classMappings enumerateKeysAndObjectsUsingBlock:^(NSString *key, EEEInjectionMapping *existingMapping, BOOL *stop) {
         if (existingMapping == mapping)
         {
             [self.classMappings removeObjectForKey:key];
@@ -164,7 +164,7 @@ static TTTInjector *_currentInjector;
     }];
 }
 
-- (TTTInjector *)asInjector
+- (EEEInjector *)asInjector
 {
     return self;
 }
@@ -172,10 +172,10 @@ static TTTInjector *_currentInjector;
 
 #pragma mark - Retrieving objects from mapped protocols and classes
 
-- (TTTInjectionMapping *)mappingForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier
+- (EEEInjectionMapping *)mappingForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier
 {
     NSString *key = [[self class] keyForClass:mappedClass withIdentifier:identifier];
-    TTTInjectionMapping *mapping = self.classMappings[key];
+    EEEInjectionMapping *mapping = self.classMappings[key];
 
     if (!mapping)
     {
@@ -185,7 +185,7 @@ static TTTInjector *_currentInjector;
 
     if (!mapping && self.allowImplicitMapping)
     {
-        mapping = [[TTTInjectionMapping alloc] initWithParent:self mappedClass:mappedClass options:TTTerminationOptionNone];
+        mapping = [[EEEInjectionMapping alloc] initWithParent:self mappedClass:mappedClass options:EEETerminationOptionNone];
     }
 
     return mapping;
@@ -193,13 +193,13 @@ static TTTInjector *_currentInjector;
 
 - (id)objectForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier
 {
-    TTTInjectionMapping *mapping = [self mappingForMappedClass:mappedClass withIdentifier:identifier];
+    EEEInjectionMapping *mapping = [self mappingForMappedClass:mappedClass withIdentifier:identifier];
     return [self injectPropertiesIntoObject:[mapping targetObject] withMapping:mapping];
 }
 
 - (Class)classForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier
 {
-    TTTInjectionMapping *mapping = [self mappingForMappedClass:mappedClass withIdentifier:identifier];
+    EEEInjectionMapping *mapping = [self mappingForMappedClass:mappedClass withIdentifier:identifier];
     return [mapping targetClass];
 }
 
@@ -211,7 +211,7 @@ static TTTInjector *_currentInjector;
     return [self injectPropertiesIntoObject:object withMapping:nil];
 }
 
-- (id)injectPropertiesIntoObject:(id)object withMapping:(TTTInjectionMapping *)mapping
+- (id)injectPropertiesIntoObject:(id)object withMapping:(EEEInjectionMapping *)mapping
 {
     if (!mapping && self.allowImplicitMapping)
     {
@@ -224,7 +224,7 @@ static TTTInjector *_currentInjector;
             if (!mapping && self.allowImplicitMapping)
             {
                 NSString *key = [[self class] keyForClass:[object class] withIdentifier:nil];
-                mapping = [[TTTInjectionMapping alloc] initWithParent:self mappedClass:[object class] options:TTTerminationOptionNone];
+                mapping = [[EEEInjectionMapping alloc] initWithParent:self mappedClass:[object class] options:EEETerminationOptionNone];
                 self.classMappings[key] = mapping;
             }
         }
@@ -239,7 +239,7 @@ static TTTInjector *_currentInjector;
     return object;
 }
 
-- (BOOL)performInjectionOnObject:(NSObject <TTTInjectable> *)object withMapping:(TTTInjectionMapping *)mapping
+- (BOOL)performInjectionOnObject:(NSObject <EEEInjectable> *)object withMapping:(EEEInjectionMapping *)mapping
 {
     __block int count = 0;
     __block BOOL nonNilPropertiesFound = NO;
@@ -260,18 +260,18 @@ static TTTInjector *_currentInjector;
     }
     else
     {
-        NSArray *properties = [TTTIntrospectProperty propertiesOfClass:[object class]];
+        NSArray *properties = [EEEIntrospectProperty propertiesOfClass:[object class]];
 
-        for (TTTIntrospectProperty *prop in properties)
+        for (EEEIntrospectProperty *prop in properties)
         {
-            if (prop.isObject && [prop implementsProtocol:@protocol(TTTInjectable)])
+            if (prop.isObject && [prop implementsProtocol:@protocol(EEEInjectable)])
             {
                 if ([object valueForKey:prop.name] == nil)
                 {
                     count++;
                     id value = [self objectForMappedClass:prop.typeClass withIdentifier:prop.name];
                     if (!value) value = [self objectForMappedClass:prop.typeClass withIdentifier:nil];
-                    NSAssert(value != nil, @"No mapping found for property %@ marked with <TTTInjectable>", prop.name);
+                    NSAssert(value != nil, @"No mapping found for property %@ marked with <EEEInjectable>", prop.name);
                     [object setValue:value forKey:prop.name];
                 }
                 else
@@ -287,28 +287,28 @@ static TTTInjector *_currentInjector;
 
 @end
 
-@implementation NSObject (TTTInjector)
+@implementation NSObject (EEEInjector)
 
-+ (Class)ttt_classWithInjector:(TTTInjector *)injector
++ (Class)eee_classWithInjector:(EEEInjector *)injector
 {
     NSAssert(injector, @"Can't inject from nil injector.");
     return [injector classForMappedClass:self withIdentifier:nil];
 }
 
-+ (id)ttt_allocWithInjector:(TTTInjector *)injector
++ (id)eee_allocWithInjector:(EEEInjector *)injector
 {
     NSAssert(injector, @"Can't inject from nil injector.");
     Class targetClass = [injector classForMappedClass:self withIdentifier:nil];
     return [targetClass alloc];
 }
 
-+ (instancetype)ttt_objectFromInjector:(TTTInjector *)injector
++ (instancetype)eee_objectFromInjector:(EEEInjector *)injector
 {
     NSAssert(injector, @"Can't inject from nil injector.");
-    return [self ttt_objectFromInjector:injector withIdentifier:nil];
+    return [self eee_objectFromInjector:injector withIdentifier:nil];
 }
 
-+ (instancetype)ttt_objectFromInjector:(TTTInjector *)injector withIdentifier:(NSString *)identifier
++ (instancetype)eee_objectFromInjector:(EEEInjector *)injector withIdentifier:(NSString *)identifier
 {
     NSAssert(injector, @"Can't inject from nil injector.");
     id value = [injector objectForMappedClass:self withIdentifier:identifier];
@@ -316,10 +316,10 @@ static TTTInjector *_currentInjector;
     return value;
 }
 
-- (instancetype)ttt_injectWithInjector:(TTTInjector *)injector
+- (instancetype)eee_injectWithInjector:(EEEInjector *)injector
 {
     NSAssert(injector, @"Can't inject from nil injector.");
-    [injector injectPropertiesIntoObject:(id <TTTInjectable>) self withMapping:nil ];
+    [injector injectPropertiesIntoObject:(id <EEEInjectable>) self withMapping:nil ];
     return self;
 }
 

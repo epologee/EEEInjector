@@ -10,21 +10,19 @@
 		122E5BD399E44839A60CE9B2 /* libPods-EEEInjector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9243A8DAA9248F39EE67280 /* libPods-EEEInjector.a */; };
 		8E02F34D4A5140C8A3CA057E /* libPods-EEEInjectorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFED0E1113A45149946A292 /* libPods-EEEInjectorTests.a */; };
 		95401063188FA61A00A7BD7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95401062188FA61A00A7BD7F /* Foundation.framework */; };
-		95401068188FA61A00A7BD7F /* EEEInjector.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 95401067188FA61A00A7BD7F /* EEEInjector.h */; };
-		9540106A188FA61A00A7BD7F /* EEEInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401069188FA61A00A7BD7F /* EEEInjector.m */; };
 		95401071188FA61A00A7BD7F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95401070188FA61A00A7BD7F /* XCTest.framework */; };
 		95401072188FA61A00A7BD7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95401062188FA61A00A7BD7F /* Foundation.framework */; };
 		95401074188FA61A00A7BD7F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95401073188FA61A00A7BD7F /* UIKit.framework */; };
 		95401077188FA61A00A7BD7F /* libEEEInjector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9540105F188FA61A00A7BD7F /* libEEEInjector.a */; };
 		9540107D188FA61A00A7BD7F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9540107B188FA61A00A7BD7F /* InfoPlist.strings */; };
-		9540109A188FA83400A7BD7F /* TTTDIBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9540108A188FA83400A7BD7F /* TTTDIBaseObject.m */; };
-		9540109B188FA83400A7BD7F /* TTTDIBaseSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9540108C188FA83400A7BD7F /* TTTDIBaseSingleton.m */; };
-		9540109C188FA83400A7BD7F /* TTTDIConcreteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9540108E188FA83400A7BD7F /* TTTDIConcreteObject.m */; };
-		9540109D188FA83400A7BD7F /* TTTDIConcreteSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401090188FA83400A7BD7F /* TTTDIConcreteSingleton.m */; };
-		9540109E188FA83400A7BD7F /* TTTDIInjectableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401092188FA83400A7BD7F /* TTTDIInjectableObject.m */; };
-		9540109F188FA83400A7BD7F /* TTTDISimpleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401094188FA83400A7BD7F /* TTTDISimpleObject.m */; };
-		954010A0188FA83400A7BD7F /* TTTDISimpleSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401096188FA83400A7BD7F /* TTTDISimpleSingleton.m */; };
-		954010A1188FA83400A7BD7F /* TTTDependencyInjectionTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401099188FA83400A7BD7F /* TTTDependencyInjectionTestCase.m */; };
+		9540109A188FA83400A7BD7F /* EEEDIBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9540108A188FA83400A7BD7F /* EEEDIBaseObject.m */; };
+		9540109B188FA83400A7BD7F /* EEEDIBaseSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9540108C188FA83400A7BD7F /* EEEDIBaseSingleton.m */; };
+		9540109C188FA83400A7BD7F /* EEEDIConcreteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9540108E188FA83400A7BD7F /* EEEDIConcreteObject.m */; };
+		9540109D188FA83400A7BD7F /* EEEDIConcreteSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401090188FA83400A7BD7F /* EEEDIConcreteSingleton.m */; };
+		9540109E188FA83400A7BD7F /* EEEDIInjectableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401092188FA83400A7BD7F /* EEEDIInjectableObject.m */; };
+		9540109F188FA83400A7BD7F /* EEEDISimpleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401094188FA83400A7BD7F /* EEEDISimpleObject.m */; };
+		954010A0188FA83400A7BD7F /* EEEDISimpleSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401096188FA83400A7BD7F /* EEEDISimpleSingleton.m */; };
+		954010A1188FA83400A7BD7F /* EEEDependencyInjectionTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401099188FA83400A7BD7F /* EEEDependencyInjectionTestCase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +42,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				95401068188FA61A00A7BD7F /* EEEInjector.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,29 +54,27 @@
 		9540105F188FA61A00A7BD7F /* libEEEInjector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEEEInjector.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		95401062188FA61A00A7BD7F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		95401066188FA61A00A7BD7F /* EEEInjector-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EEEInjector-Prefix.pch"; sourceTree = "<group>"; };
-		95401067188FA61A00A7BD7F /* EEEInjector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EEEInjector.h; sourceTree = "<group>"; };
-		95401069188FA61A00A7BD7F /* EEEInjector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EEEInjector.m; sourceTree = "<group>"; };
 		9540106F188FA61A00A7BD7F /* EEEInjectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EEEInjectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95401070188FA61A00A7BD7F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		95401073188FA61A00A7BD7F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		9540107A188FA61A00A7BD7F /* EEEInjectorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EEEInjectorTests-Info.plist"; sourceTree = "<group>"; };
 		9540107C188FA61A00A7BD7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		95401089188FA83400A7BD7F /* TTTDIBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDIBaseObject.h; sourceTree = "<group>"; };
-		9540108A188FA83400A7BD7F /* TTTDIBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDIBaseObject.m; sourceTree = "<group>"; };
-		9540108B188FA83400A7BD7F /* TTTDIBaseSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDIBaseSingleton.h; sourceTree = "<group>"; };
-		9540108C188FA83400A7BD7F /* TTTDIBaseSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDIBaseSingleton.m; sourceTree = "<group>"; };
-		9540108D188FA83400A7BD7F /* TTTDIConcreteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDIConcreteObject.h; sourceTree = "<group>"; };
-		9540108E188FA83400A7BD7F /* TTTDIConcreteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDIConcreteObject.m; sourceTree = "<group>"; };
-		9540108F188FA83400A7BD7F /* TTTDIConcreteSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDIConcreteSingleton.h; sourceTree = "<group>"; };
-		95401090188FA83400A7BD7F /* TTTDIConcreteSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDIConcreteSingleton.m; sourceTree = "<group>"; };
-		95401091188FA83400A7BD7F /* TTTDIInjectableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDIInjectableObject.h; sourceTree = "<group>"; };
-		95401092188FA83400A7BD7F /* TTTDIInjectableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDIInjectableObject.m; sourceTree = "<group>"; };
-		95401093188FA83400A7BD7F /* TTTDISimpleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDISimpleObject.h; sourceTree = "<group>"; };
-		95401094188FA83400A7BD7F /* TTTDISimpleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDISimpleObject.m; sourceTree = "<group>"; };
-		95401095188FA83400A7BD7F /* TTTDISimpleSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDISimpleSingleton.h; sourceTree = "<group>"; };
-		95401096188FA83400A7BD7F /* TTTDISimpleSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDISimpleSingleton.m; sourceTree = "<group>"; };
-		95401098188FA83400A7BD7F /* TTTDependencyInjectionTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDependencyInjectionTestCase.h; sourceTree = "<group>"; };
-		95401099188FA83400A7BD7F /* TTTDependencyInjectionTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDependencyInjectionTestCase.m; sourceTree = "<group>"; };
+		95401089188FA83400A7BD7F /* EEEDIBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDIBaseObject.h; sourceTree = "<group>"; };
+		9540108A188FA83400A7BD7F /* EEEDIBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDIBaseObject.m; sourceTree = "<group>"; };
+		9540108B188FA83400A7BD7F /* EEEDIBaseSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDIBaseSingleton.h; sourceTree = "<group>"; };
+		9540108C188FA83400A7BD7F /* EEEDIBaseSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDIBaseSingleton.m; sourceTree = "<group>"; };
+		9540108D188FA83400A7BD7F /* EEEDIConcreteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDIConcreteObject.h; sourceTree = "<group>"; };
+		9540108E188FA83400A7BD7F /* EEEDIConcreteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDIConcreteObject.m; sourceTree = "<group>"; };
+		9540108F188FA83400A7BD7F /* EEEDIConcreteSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDIConcreteSingleton.h; sourceTree = "<group>"; };
+		95401090188FA83400A7BD7F /* EEEDIConcreteSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDIConcreteSingleton.m; sourceTree = "<group>"; };
+		95401091188FA83400A7BD7F /* EEEDIInjectableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDIInjectableObject.h; sourceTree = "<group>"; };
+		95401092188FA83400A7BD7F /* EEEDIInjectableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDIInjectableObject.m; sourceTree = "<group>"; };
+		95401093188FA83400A7BD7F /* EEEDISimpleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDISimpleObject.h; sourceTree = "<group>"; };
+		95401094188FA83400A7BD7F /* EEEDISimpleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDISimpleObject.m; sourceTree = "<group>"; };
+		95401095188FA83400A7BD7F /* EEEDISimpleSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDISimpleSingleton.h; sourceTree = "<group>"; };
+		95401096188FA83400A7BD7F /* EEEDISimpleSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDISimpleSingleton.m; sourceTree = "<group>"; };
+		95401098188FA83400A7BD7F /* EEEDependencyInjectionTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDependencyInjectionTestCase.h; sourceTree = "<group>"; };
+		95401099188FA83400A7BD7F /* EEEDependencyInjectionTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDependencyInjectionTestCase.m; sourceTree = "<group>"; };
 		A9243A8DAA9248F39EE67280 /* libPods-EEEInjector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EEEInjector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -144,8 +139,6 @@
 		95401064188FA61A00A7BD7F /* EEEInjector */ = {
 			isa = PBXGroup;
 			children = (
-				95401067188FA61A00A7BD7F /* EEEInjector.h */,
-				95401069188FA61A00A7BD7F /* EEEInjector.m */,
 				95401065188FA61A00A7BD7F /* Supporting Files */,
 			);
 			path = EEEInjector;
@@ -181,20 +174,20 @@
 		95401088188FA83400A7BD7F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				95401089188FA83400A7BD7F /* TTTDIBaseObject.h */,
-				9540108A188FA83400A7BD7F /* TTTDIBaseObject.m */,
-				9540108B188FA83400A7BD7F /* TTTDIBaseSingleton.h */,
-				9540108C188FA83400A7BD7F /* TTTDIBaseSingleton.m */,
-				9540108D188FA83400A7BD7F /* TTTDIConcreteObject.h */,
-				9540108E188FA83400A7BD7F /* TTTDIConcreteObject.m */,
-				9540108F188FA83400A7BD7F /* TTTDIConcreteSingleton.h */,
-				95401090188FA83400A7BD7F /* TTTDIConcreteSingleton.m */,
-				95401091188FA83400A7BD7F /* TTTDIInjectableObject.h */,
-				95401092188FA83400A7BD7F /* TTTDIInjectableObject.m */,
-				95401093188FA83400A7BD7F /* TTTDISimpleObject.h */,
-				95401094188FA83400A7BD7F /* TTTDISimpleObject.m */,
-				95401095188FA83400A7BD7F /* TTTDISimpleSingleton.h */,
-				95401096188FA83400A7BD7F /* TTTDISimpleSingleton.m */,
+				95401089188FA83400A7BD7F /* EEEDIBaseObject.h */,
+				9540108A188FA83400A7BD7F /* EEEDIBaseObject.m */,
+				9540108B188FA83400A7BD7F /* EEEDIBaseSingleton.h */,
+				9540108C188FA83400A7BD7F /* EEEDIBaseSingleton.m */,
+				9540108D188FA83400A7BD7F /* EEEDIConcreteObject.h */,
+				9540108E188FA83400A7BD7F /* EEEDIConcreteObject.m */,
+				9540108F188FA83400A7BD7F /* EEEDIConcreteSingleton.h */,
+				95401090188FA83400A7BD7F /* EEEDIConcreteSingleton.m */,
+				95401091188FA83400A7BD7F /* EEEDIInjectableObject.h */,
+				95401092188FA83400A7BD7F /* EEEDIInjectableObject.m */,
+				95401093188FA83400A7BD7F /* EEEDISimpleObject.h */,
+				95401094188FA83400A7BD7F /* EEEDISimpleObject.m */,
+				95401095188FA83400A7BD7F /* EEEDISimpleSingleton.h */,
+				95401096188FA83400A7BD7F /* EEEDISimpleSingleton.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -202,8 +195,8 @@
 		95401097188FA83400A7BD7F /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				95401098188FA83400A7BD7F /* TTTDependencyInjectionTestCase.h */,
-				95401099188FA83400A7BD7F /* TTTDependencyInjectionTestCase.m */,
+				95401098188FA83400A7BD7F /* EEEDependencyInjectionTestCase.h */,
+				95401099188FA83400A7BD7F /* EEEDependencyInjectionTestCase.m */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -356,7 +349,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9540106A188FA61A00A7BD7F /* EEEInjector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,14 +356,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9540109C188FA83400A7BD7F /* TTTDIConcreteObject.m in Sources */,
-				954010A0188FA83400A7BD7F /* TTTDISimpleSingleton.m in Sources */,
-				954010A1188FA83400A7BD7F /* TTTDependencyInjectionTestCase.m in Sources */,
-				9540109E188FA83400A7BD7F /* TTTDIInjectableObject.m in Sources */,
-				9540109B188FA83400A7BD7F /* TTTDIBaseSingleton.m in Sources */,
-				9540109D188FA83400A7BD7F /* TTTDIConcreteSingleton.m in Sources */,
-				9540109F188FA83400A7BD7F /* TTTDISimpleObject.m in Sources */,
-				9540109A188FA83400A7BD7F /* TTTDIBaseObject.m in Sources */,
+				9540109C188FA83400A7BD7F /* EEEDIConcreteObject.m in Sources */,
+				954010A0188FA83400A7BD7F /* EEEDISimpleSingleton.m in Sources */,
+				954010A1188FA83400A7BD7F /* EEEDependencyInjectionTestCase.m in Sources */,
+				9540109E188FA83400A7BD7F /* EEEDIInjectableObject.m in Sources */,
+				9540109B188FA83400A7BD7F /* EEEDIBaseSingleton.m in Sources */,
+				9540109D188FA83400A7BD7F /* EEEDIConcreteSingleton.m in Sources */,
+				9540109F188FA83400A7BD7F /* EEEDISimpleObject.m in Sources */,
+				9540109A188FA83400A7BD7F /* EEEDIBaseObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

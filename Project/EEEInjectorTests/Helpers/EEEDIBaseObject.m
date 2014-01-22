@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "EEEDIBaseObject.h"
 
-@interface TTTDIBaseObject : NSObject
+@implementation EEEDIBaseObject
 
 @end

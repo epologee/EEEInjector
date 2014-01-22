@@ -18,28 +18,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "TTTInjectionMapping.h"
-#import "TTTIntrospectProperty.h"
-#import "TTTInjector.h"
+#import "EEEInjectionMapping.h"
+#import "EEEIntrospectProperty.h"
+#import "EEEInjector.h"
 
-#define IS_SINGLETON (self.options & TTTerminationOptionSingleton)
-#define IS_SINGLE_SERVING (self.options & TTTerminationOptionSingleServing)
-#define IS_ALLOC_ONLY (self.options & TTTerminationOptionAllocOnly)
+#define IS_SINGLETON (self.options & EEETerminationOptionSingleton)
+#define IS_SINGLE_SERVING (self.options & EEETerminationOptionSingleServing)
+#define IS_ALLOC_ONLY (self.options & EEETerminationOptionAllocOnly)
 
-@interface TTTInjectionMapping ()
+@interface EEEInjectionMapping ()
 
 @property(nonatomic, strong) Class mappedClass;
-@property(nonatomic, strong) TTTInjectionMapping *childMapping;
-@property(nonatomic) TTTerminationOption options;
-@property(nonatomic, weak, readwrite) id <TTInjectionMappingParent> parent;
+@property(nonatomic, strong) EEEInjectionMapping *childMapping;
+@property(nonatomic) EEETerminationOption options;
+@property(nonatomic, weak, readwrite) id <EEEInjectionMappingParent> parent;
 @property(nonatomic, strong, readwrite) id targetObject;
-@property(nonatomic, strong, readwrite) TTTInjectionBlock targetBlock;
-@property(nonatomic, readonly) TTTInjectionMapping *endMapping;
+@property(nonatomic, strong, readwrite) EEEInjectionBlock targetBlock;
+@property(nonatomic, readonly) EEEInjectionMapping *endMapping;
 @property(nonatomic, strong) NSMutableDictionary *injectables;
 
 @end
 
-@implementation TTTInjectionMapping
+@implementation EEEInjectionMapping
 {
     dispatch_once_t _onceToken;
     id _singleton;
@@ -47,7 +47,7 @@
 
 #pragma mark Class mapping source
 
-- (id)initWithParent:(id <TTInjectionMappingParent>)parent mappedClass:(Class)mappedClass options:(TTTerminationOption)options
+- (id)initWithParent:(id <EEEInjectionMappingParent>)parent mappedClass:(Class)mappedClass options:(EEETerminationOption)options
 {
     self = [super init];
 
@@ -58,10 +58,10 @@
         self.options = options;
         self.injectables = [NSMutableDictionary dictionary];
         {
-            NSArray *properties = [TTTIntrospectProperty propertiesOfClass:mappedClass];
-            for (TTTIntrospectProperty *prop in properties)
+            NSArray *properties = [EEEIntrospectProperty propertiesOfClass:mappedClass];
+            for (EEEIntrospectProperty *prop in properties)
             {
-                if (prop.isObject && [prop implementsProtocol:@protocol(TTTInjectable)])
+                if (prop.isObject && [prop implementsProtocol:@protocol(EEEInjectable)])
                 {
                     self.injectables[prop.name] = prop.typeClass;
                 }
@@ -72,14 +72,14 @@
     return self;
 }
 
-- (id <TTInjectionMappingEnd>)toObject:(id)object
+- (id <EEEInjectionMappingEnd>)toObject:(id)object
 {
     self.targetObject = object;
     [self assertIntegrity];
     return self;
 }
 
-- (id <TTInjectionMappingEnd>)toBlock:(TTTInjectionBlock)block
+- (id <EEEInjectionMappingEnd>)toBlock:(EEEInjectionBlock)block
 {
     self.targetBlock = block;
     [self assertIntegrity];
@@ -88,29 +88,29 @@
 
 #pragma mark Class mapping target
 
-- (id <TTTInjectionMapping>)toSubclass:(Class)class
+- (id <EEEInjectionMapping>)toSubclass:(Class)class
 {
-    self.childMapping = [[TTTInjectionMapping alloc] initWithParent:self mappedClass:class options:TTTerminationOptionNone];
+    self.childMapping = [[EEEInjectionMapping alloc] initWithParent:self mappedClass:class options:EEETerminationOptionNone];
     [self assertIntegrity];
-    return (id <TTTInjectionMapping>) self.childMapping;
+    return (id <EEEInjectionMapping>) self.childMapping;
 }
 
-- (id <TTInjectionMappingEnd>)allocOnly
+- (id <EEEInjectionMappingEnd>)allocOnly
 {
-    self.options |= TTTerminationOptionAllocOnly;
+    self.options |= EEETerminationOptionAllocOnly;
     [self assertIntegrity];
     return self;
 }
 
 - (void)asSingleton
 {
-    self.options |= TTTerminationOptionSingleton;
+    self.options |= EEETerminationOptionSingleton;
     [self assertIntegrity];
 }
 
 - (void)singleServing
 {
-    self.options |= TTTerminationOptionSingleServing;
+    self.options |= EEETerminationOptionSingleServing;
     [self assertIntegrity];
 }
 
@@ -177,7 +177,7 @@
     }
 }
 
-- (void)removeChildMapping:(TTTInjectionMapping *)mapping
+- (void)removeChildMapping:(EEEInjectionMapping *)mapping
 {
     // bubble up to the injector.
     [self.parent removeChildMapping:self];

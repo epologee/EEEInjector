@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "TTTDIBaseSingleton.h"
+#import <XCTest/XCTest.h>
 
-@interface TTTDIConcreteSingleton : TTTDIBaseSingleton
+@interface EEEDependencyInjectionTestCase : XCTestCase
 
 @end

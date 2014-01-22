@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "TTTDIBaseObject.h"
+#import "EEEDIConcreteSingleton.h"
 
-@implementation TTTDIBaseObject
+@implementation EEEDIConcreteSingleton
 
 @end
