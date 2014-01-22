@@ -1,11 +1,9 @@
-# [wip]EEEInjector
+# EEEInjector
 
 <!--[![Version](http://cocoapod-badges.herokuapp.com/v/EEEInjector/badge.png)](http://cocoadocs.org/docsets/EEEInjector)
 [![Platform](http://cocoapod-badges.herokuapp.com/p/EEEInjector/badge.png)](http://cocoadocs.org/docsets/EEEInjector)-->
 
-## This is a work-in-progress project.
-
-Use the TTTInjector from https://github.com/TwelveTwenty/TwelveTwentyToolkit-ObjC if you need it right now. This project will eventually replace the dependency injection part of that toolkit.
+f.k.a. [TwelveTwentyToolkit/TTTInjector](https://github.com/TwelveTwenty/TwelveTwentyToolkit-ObjC)
 
 ###Dependency Injection
 If you've never heard of it, it can be a bit hard to immediately grasp the concept and the power of [Dependency Injection](http://en.wikipedia.org/wiki/Dependency_injection#Highly_coupled_dependency)(DI), but once you've worked with it, you will not want to go without again. DI is about much more than reducing the reliance on singletons, see the [benefits section on Wikipedia](http://en.wikipedia.org/wiki/Dependency_injection#Benefits). 
@@ -24,9 +22,7 @@ Several features:
 
 ## Usage
 
-To run the example project; clone the repo, and run `pod install` from the Project directory first.
-
-## Requirements
+To test the example project; clone the repo, and run `pod install` from the Project directory first.
 
 ## Installation
 
