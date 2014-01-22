@@ -7,7 +7,3 @@
 //
 
 #import "EEEInjector.h"
-
-@implementation EEEInjector
-
-@end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		122E5BD399E44839A60CE9B2 /* libPods-EEEInjector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9243A8DAA9248F39EE67280 /* libPods-EEEInjector.a */; };
+		8E02F34D4A5140C8A3CA057E /* libPods-EEEInjectorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFED0E1113A45149946A292 /* libPods-EEEInjectorTests.a */; };
 		95401063188FA61A00A7BD7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95401062188FA61A00A7BD7F /* Foundation.framework */; };
 		95401068188FA61A00A7BD7F /* EEEInjector.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 95401067188FA61A00A7BD7F /* EEEInjector.h */; };
 		9540106A188FA61A00A7BD7F /* EEEInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401069188FA61A00A7BD7F /* EEEInjector.m */; };
@@ -15,7 +17,14 @@
 		95401074188FA61A00A7BD7F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95401073188FA61A00A7BD7F /* UIKit.framework */; };
 		95401077188FA61A00A7BD7F /* libEEEInjector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9540105F188FA61A00A7BD7F /* libEEEInjector.a */; };
 		9540107D188FA61A00A7BD7F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9540107B188FA61A00A7BD7F /* InfoPlist.strings */; };
-		9540107F188FA61A00A7BD7F /* EEEInjectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9540107E188FA61A00A7BD7F /* EEEInjectorTests.m */; };
+		9540109A188FA83400A7BD7F /* TTTDIBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9540108A188FA83400A7BD7F /* TTTDIBaseObject.m */; };
+		9540109B188FA83400A7BD7F /* TTTDIBaseSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9540108C188FA83400A7BD7F /* TTTDIBaseSingleton.m */; };
+		9540109C188FA83400A7BD7F /* TTTDIConcreteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9540108E188FA83400A7BD7F /* TTTDIConcreteObject.m */; };
+		9540109D188FA83400A7BD7F /* TTTDIConcreteSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401090188FA83400A7BD7F /* TTTDIConcreteSingleton.m */; };
+		9540109E188FA83400A7BD7F /* TTTDIInjectableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401092188FA83400A7BD7F /* TTTDIInjectableObject.m */; };
+		9540109F188FA83400A7BD7F /* TTTDISimpleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401094188FA83400A7BD7F /* TTTDISimpleObject.m */; };
+		954010A0188FA83400A7BD7F /* TTTDISimpleSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401096188FA83400A7BD7F /* TTTDISimpleSingleton.m */; };
+		954010A1188FA83400A7BD7F /* TTTDependencyInjectionTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95401099188FA83400A7BD7F /* TTTDependencyInjectionTestCase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +51,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05D50A62F4154ABF9E7657FD /* Pods-EEEInjectorTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EEEInjectorTests.xcconfig"; path = "Pods/Pods-EEEInjectorTests.xcconfig"; sourceTree = "<group>"; };
+		6853BF9C0EDF427DA98EEF01 /* Pods-EEEInjector.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EEEInjector.xcconfig"; path = "Pods/Pods-EEEInjector.xcconfig"; sourceTree = "<group>"; };
+		6DFED0E1113A45149946A292 /* libPods-EEEInjectorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EEEInjectorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9540105F188FA61A00A7BD7F /* libEEEInjector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEEEInjector.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		95401062188FA61A00A7BD7F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		95401066188FA61A00A7BD7F /* EEEInjector-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EEEInjector-Prefix.pch"; sourceTree = "<group>"; };
@@ -52,7 +64,23 @@
 		95401073188FA61A00A7BD7F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		9540107A188FA61A00A7BD7F /* EEEInjectorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EEEInjectorTests-Info.plist"; sourceTree = "<group>"; };
 		9540107C188FA61A00A7BD7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9540107E188FA61A00A7BD7F /* EEEInjectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EEEInjectorTests.m; sourceTree = "<group>"; };
+		95401089188FA83400A7BD7F /* TTTDIBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDIBaseObject.h; sourceTree = "<group>"; };
+		9540108A188FA83400A7BD7F /* TTTDIBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDIBaseObject.m; sourceTree = "<group>"; };
+		9540108B188FA83400A7BD7F /* TTTDIBaseSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDIBaseSingleton.h; sourceTree = "<group>"; };
+		9540108C188FA83400A7BD7F /* TTTDIBaseSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDIBaseSingleton.m; sourceTree = "<group>"; };
+		9540108D188FA83400A7BD7F /* TTTDIConcreteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDIConcreteObject.h; sourceTree = "<group>"; };
+		9540108E188FA83400A7BD7F /* TTTDIConcreteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDIConcreteObject.m; sourceTree = "<group>"; };
+		9540108F188FA83400A7BD7F /* TTTDIConcreteSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDIConcreteSingleton.h; sourceTree = "<group>"; };
+		95401090188FA83400A7BD7F /* TTTDIConcreteSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDIConcreteSingleton.m; sourceTree = "<group>"; };
+		95401091188FA83400A7BD7F /* TTTDIInjectableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDIInjectableObject.h; sourceTree = "<group>"; };
+		95401092188FA83400A7BD7F /* TTTDIInjectableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDIInjectableObject.m; sourceTree = "<group>"; };
+		95401093188FA83400A7BD7F /* TTTDISimpleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDISimpleObject.h; sourceTree = "<group>"; };
+		95401094188FA83400A7BD7F /* TTTDISimpleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDISimpleObject.m; sourceTree = "<group>"; };
+		95401095188FA83400A7BD7F /* TTTDISimpleSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDISimpleSingleton.h; sourceTree = "<group>"; };
+		95401096188FA83400A7BD7F /* TTTDISimpleSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDISimpleSingleton.m; sourceTree = "<group>"; };
+		95401098188FA83400A7BD7F /* TTTDependencyInjectionTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDependencyInjectionTestCase.h; sourceTree = "<group>"; };
+		95401099188FA83400A7BD7F /* TTTDependencyInjectionTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDependencyInjectionTestCase.m; sourceTree = "<group>"; };
+		A9243A8DAA9248F39EE67280 /* libPods-EEEInjector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EEEInjector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95401063188FA61A00A7BD7F /* Foundation.framework in Frameworks */,
+				122E5BD399E44839A60CE9B2 /* libPods-EEEInjector.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +101,7 @@
 				95401074188FA61A00A7BD7F /* UIKit.framework in Frameworks */,
 				95401072188FA61A00A7BD7F /* Foundation.framework in Frameworks */,
 				95401077188FA61A00A7BD7F /* libEEEInjector.a in Frameworks */,
+				8E02F34D4A5140C8A3CA057E /* libPods-EEEInjectorTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +115,8 @@
 				95401078188FA61A00A7BD7F /* EEEInjectorTests */,
 				95401061188FA61A00A7BD7F /* Frameworks */,
 				95401060188FA61A00A7BD7F /* Products */,
+				6853BF9C0EDF427DA98EEF01 /* Pods-EEEInjector.xcconfig */,
+				05D50A62F4154ABF9E7657FD /* Pods-EEEInjectorTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +135,8 @@
 				95401062188FA61A00A7BD7F /* Foundation.framework */,
 				95401070188FA61A00A7BD7F /* XCTest.framework */,
 				95401073188FA61A00A7BD7F /* UIKit.framework */,
+				A9243A8DAA9248F39EE67280 /* libPods-EEEInjector.a */,
+				6DFED0E1113A45149946A292 /* libPods-EEEInjectorTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -128,7 +162,8 @@
 		95401078188FA61A00A7BD7F /* EEEInjectorTests */ = {
 			isa = PBXGroup;
 			children = (
-				9540107E188FA61A00A7BD7F /* EEEInjectorTests.m */,
+				95401088188FA83400A7BD7F /* Helpers */,
+				95401097188FA83400A7BD7F /* Specs */,
 				95401079188FA61A00A7BD7F /* Supporting Files */,
 			);
 			path = EEEInjectorTests;
@@ -143,6 +178,36 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		95401088188FA83400A7BD7F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				95401089188FA83400A7BD7F /* TTTDIBaseObject.h */,
+				9540108A188FA83400A7BD7F /* TTTDIBaseObject.m */,
+				9540108B188FA83400A7BD7F /* TTTDIBaseSingleton.h */,
+				9540108C188FA83400A7BD7F /* TTTDIBaseSingleton.m */,
+				9540108D188FA83400A7BD7F /* TTTDIConcreteObject.h */,
+				9540108E188FA83400A7BD7F /* TTTDIConcreteObject.m */,
+				9540108F188FA83400A7BD7F /* TTTDIConcreteSingleton.h */,
+				95401090188FA83400A7BD7F /* TTTDIConcreteSingleton.m */,
+				95401091188FA83400A7BD7F /* TTTDIInjectableObject.h */,
+				95401092188FA83400A7BD7F /* TTTDIInjectableObject.m */,
+				95401093188FA83400A7BD7F /* TTTDISimpleObject.h */,
+				95401094188FA83400A7BD7F /* TTTDISimpleObject.m */,
+				95401095188FA83400A7BD7F /* TTTDISimpleSingleton.h */,
+				95401096188FA83400A7BD7F /* TTTDISimpleSingleton.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		95401097188FA83400A7BD7F /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				95401098188FA83400A7BD7F /* TTTDependencyInjectionTestCase.h */,
+				95401099188FA83400A7BD7F /* TTTDependencyInjectionTestCase.m */,
+			);
+			path = Specs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,9 +215,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 95401082188FA61A00A7BD7F /* Build configuration list for PBXNativeTarget "EEEInjector" */;
 			buildPhases = (
+				BB49271F35984B259A748E26 /* Check Pods Manifest.lock */,
 				9540105B188FA61A00A7BD7F /* Sources */,
 				9540105C188FA61A00A7BD7F /* Frameworks */,
 				9540105D188FA61A00A7BD7F /* CopyFiles */,
+				D1BF80BE395F4DA9BF1F0406 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +234,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 95401085188FA61A00A7BD7F /* Build configuration list for PBXNativeTarget "EEEInjectorTests" */;
 			buildPhases = (
+				C859E71FA8A44D20B7277B19 /* Check Pods Manifest.lock */,
 				9540106B188FA61A00A7BD7F /* Sources */,
 				9540106C188FA61A00A7BD7F /* Frameworks */,
 				9540106D188FA61A00A7BD7F /* Resources */,
+				07E0FBD65E204A1797520A7D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,6 +288,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		07E0FBD65E204A1797520A7D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-EEEInjectorTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB49271F35984B259A748E26 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C859E71FA8A44D20B7277B19 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D1BF80BE395F4DA9BF1F0406 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-EEEInjector-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9540105B188FA61A00A7BD7F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -232,7 +364,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9540107F188FA61A00A7BD7F /* EEEInjectorTests.m in Sources */,
+				9540109C188FA83400A7BD7F /* TTTDIConcreteObject.m in Sources */,
+				954010A0188FA83400A7BD7F /* TTTDISimpleSingleton.m in Sources */,
+				954010A1188FA83400A7BD7F /* TTTDependencyInjectionTestCase.m in Sources */,
+				9540109E188FA83400A7BD7F /* TTTDIInjectableObject.m in Sources */,
+				9540109B188FA83400A7BD7F /* TTTDIBaseSingleton.m in Sources */,
+				9540109D188FA83400A7BD7F /* TTTDIConcreteSingleton.m in Sources */,
+				9540109F188FA83400A7BD7F /* TTTDISimpleObject.m in Sources */,
+				9540109A188FA83400A7BD7F /* TTTDIBaseObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,11 +469,11 @@
 		};
 		95401083188FA61A00A7BD7F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6853BF9C0EDF427DA98EEF01 /* Pods-EEEInjector.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/EEEInjector.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EEEInjector/EEEInjector-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -342,11 +481,11 @@
 		};
 		95401084188FA61A00A7BD7F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6853BF9C0EDF427DA98EEF01 /* Pods-EEEInjector.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/EEEInjector.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EEEInjector/EEEInjector-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -354,6 +493,7 @@
 		};
 		95401086188FA61A00A7BD7F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05D50A62F4154ABF9E7657FD /* Pods-EEEInjectorTests.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -375,6 +515,7 @@
 		};
 		95401087188FA61A00A7BD7F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05D50A62F4154ABF9E7657FD /* Pods-EEEInjectorTests.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -409,6 +550,7 @@
 				95401084188FA61A00A7BD7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		95401085188FA61A00A7BD7F /* Build configuration list for PBXNativeTarget "EEEInjectorTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +559,7 @@
 				95401087188FA61A00A7BD7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

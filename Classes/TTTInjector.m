@@ -110,22 +110,22 @@ static TTTInjector *_currentInjector;
 
 #pragma mark - Mapping protocols and classes
 
-- (id <TTInjectionMappingStart>)mapClass:(Class)class
+- (id <TTTInjectionMappingStart>)mapClass:(Class)class
 {
     return [self mapClass:class withIdentifier:nil];
 }
 
-- (id <TTInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier
+- (id <TTTInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier
 {
     return [self mapClass:class withIdentifier:identifier overwriteExisting:NO];
 }
 
-- (id <TTInjectionMappingStart>)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting
+- (id <TTTInjectionMappingStart>)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting
 {
     return [self mapClass:class withIdentifier:nil overwriteExisting:overwriteExisting];
 }
 
-- (id <TTInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting
+- (id <TTTInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting
 {
     NSString *key = [[self class] keyForClass:class withIdentifier:identifier];
 

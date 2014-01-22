@@ -19,8 +19,8 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "TTInjector.h"
+#import "TTTInjector.h"
 
-@interface TTTDISimpleObject : NSObject <TTInjectable>
+@interface TTTDISimpleObject : NSObject <TTTInjectable>
 
 @end

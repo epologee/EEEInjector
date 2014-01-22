@@ -36,7 +36,7 @@
 
 @end
 
-@protocol TTInjectionMappingStart <TTTInjectionMapping>
+@protocol TTTInjectionMappingStart <TTTInjectionMapping>
 
 - (id <TTTInjectionMapping>)toSubclass:(Class)class;
 
@@ -61,7 +61,7 @@ typedef enum
 
 @end
 
-@interface TTTInjectionMapping : NSObject <TTInjectionMappingStart, TTInjectionMappingParent>
+@interface TTTInjectionMapping : NSObject <TTTInjectionMappingStart, TTInjectionMappingParent>
 
 @property (nonatomic, strong, readonly) Class targetClass;
 @property (nonatomic, strong, readonly) id targetObject;

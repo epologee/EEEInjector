@@ -19,14 +19,14 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "TTInjector.h"
+#import "TTTInjector.h"
 
 @class TTTDISimpleObject;
 
-@interface TTTDIInjectableObject : NSObject <TTInjectable>
+@interface TTTDIInjectableObject : NSObject <TTTInjectable>
 
-@property (nonatomic, strong) TTTDISimpleObject <TTInjectable>*simpleInjectedObject;
+@property (nonatomic, strong) TTTDISimpleObject <TTTInjectable>*simpleInjectedObject;
 @property (nonatomic, strong) TTTDISimpleObject *simpleNotInjectedObject;
-@property (nonatomic, strong) NSArray <TTInjectable>*simpleList;
+@property (nonatomic, strong) NSArray <TTTInjectable>*simpleList;
 
 @end

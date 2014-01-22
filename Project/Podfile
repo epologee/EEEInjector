@@ -1,5 +1,5 @@
 target "EEEInjector" do
-  pod "EEEInterventions", :path => "../"
+  pod "EEEInjector", :path => "../"
 end
 
 target "EEEInjectorTests" do

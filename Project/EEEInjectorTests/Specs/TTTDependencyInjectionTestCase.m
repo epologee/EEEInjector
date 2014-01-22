@@ -20,7 +20,7 @@
 
 #import "TTTDependencyInjectionTestCase.h"
 
-#import "TTInjector.h"
+#import "TTTInjector.h"
 
 #import "TTTDISimpleObject.h"
 #import "TTTDIBaseObject.h"
@@ -34,7 +34,7 @@
 
 @interface TTTDependencyInjectionTestCase ()
 
-@property (nonatomic, strong) TTInjector *injector;
+@property (nonatomic, strong) TTTInjector *injector;
 @property (nonatomic, strong) id existingObject;
 @property (nonatomic, strong) NSArray *simpleListObject;
 
@@ -45,7 +45,7 @@
 
 - (void)setUp
 {
-    self.injector = [[TTInjector alloc] init];
+    self.injector = [[TTTInjector alloc] init];
     
 	[self.injector mapClass:[TTTDISimpleObject class]];
     [[self.injector mapClass:[TTTDIBaseObject class]] toSubclass:[TTTDIConcreteObject class]];
@@ -71,7 +71,7 @@
 
 - (void)testSetup
 {
-	STAssertTrue(YES, @"Setup works");
+	XCTAssertTrue(YES, @"Setup works");
 }
 
 - (void)testNoMapping
@@ -79,92 +79,92 @@
     BOOL assertionThrown = NO;
     
     @try {
-        NSMutableSet *nilSet = [NSMutableSet objectFromInjector:self.injector];
-        STAssertNil(nilSet, @"Request of a non-mapped class returns nil.");
+        NSMutableSet *nilSet = [NSMutableSet ttt_objectFromInjector:self.injector];
+        XCTAssertNil(nilSet, @"Request of a non-mapped class returns nil.");
     }
     @catch (NSException *exception) {
         assertionThrown = YES;
     }
 
-    STAssertTrue(assertionThrown, @"Request of a non-mapped class throws an error.");
+    XCTAssertTrue(assertionThrown, @"Request of a non-mapped class throws an error.");
 }
 
 - (void)testSimpleSpawnMapping
 {
-    TTTDISimpleObject *objectA = [TTTDISimpleObject objectFromInjector:self.injector];
+    TTTDISimpleObject *objectA = [TTTDISimpleObject ttt_objectFromInjector:self.injector];
     
-    STAssertTrue([objectA isKindOfClass:[TTTDISimpleObject class]], @"Requested object for mapped class returns an instance of that class.");
+    XCTAssertTrue([objectA isKindOfClass:[TTTDISimpleObject class]], @"Requested object for mapped class returns an instance of that class.");
 
-    TTTDISimpleObject *objectB = [TTTDISimpleObject objectFromInjector:self.injector];
+    TTTDISimpleObject *objectB = [TTTDISimpleObject ttt_objectFromInjector:self.injector];
 
-    STAssertFalse(objectA == objectB, @"Consecutive requested objects with simple mapping return newly allocated objects.");
+    XCTAssertFalse(objectA == objectB, @"Consecutive requested objects with simple mapping return newly allocated objects.");
 }
 
 - (void)testOnceMapping
 {
-    NSDictionary *dictionaryA = [NSDictionary objectFromInjector:self.injector];
+    NSDictionary *dictionaryA = [NSDictionary ttt_objectFromInjector:self.injector];
     
-    STAssertTrue([dictionaryA isKindOfClass:[NSDictionary class]], @"Requested object for mapped class returns an instance of that class.");
+    XCTAssertTrue([dictionaryA isKindOfClass:[NSDictionary class]], @"Requested object for mapped class returns an instance of that class.");
     
     BOOL assertionThrown = NO;
     
     @try {
-        NSDictionary *dictionaryB = [NSDictionary objectFromInjector:self.injector];
-        STAssertNil(dictionaryB, @"Second requested of a `once` object returns nil.");
+        NSDictionary *dictionaryB = [NSDictionary ttt_objectFromInjector:self.injector];
+        XCTAssertNil(dictionaryB, @"Second requested of a `once` object returns nil.");
     }
     @catch (NSException *exception) {
         assertionThrown = YES;
     }
     
-    STAssertTrue(assertionThrown, @"Second request of a `once` object throws an error.");
+    XCTAssertTrue(assertionThrown, @"Second request of a `once` object throws an error.");
 }
 
 
 - (void)testSingletonMapping
 {
-    TTTDISimpleSingleton *objectA = [TTTDISimpleSingleton objectFromInjector:self.injector];
+    TTTDISimpleSingleton *objectA = [TTTDISimpleSingleton ttt_objectFromInjector:self.injector];
     
-    STAssertTrue([objectA isKindOfClass:[TTTDISimpleSingleton class]], @"Requested object for mapped class returns an instance of that class.");
+    XCTAssertTrue([objectA isKindOfClass:[TTTDISimpleSingleton class]], @"Requested object for mapped class returns an instance of that class.");
     
-    TTTDISimpleSingleton *objectB = [TTTDISimpleSingleton objectFromInjector:self.injector];
+    TTTDISimpleSingleton *objectB = [TTTDISimpleSingleton ttt_objectFromInjector:self.injector];
     
-    STAssertTrue(objectA == objectB, @"Consecutive requested singletons return the same object every time.");
+    XCTAssertTrue(objectA == objectB, @"Consecutive requested singletons return the same object every time.");
 }
 
 - (void)testSingletonSubclassMapping
 {
-    TTTDIBaseSingleton *objectA = [TTTDIBaseSingleton objectFromInjector:self.injector];
+    TTTDIBaseSingleton *objectA = [TTTDIBaseSingleton ttt_objectFromInjector:self.injector];
     
-    STAssertTrue([objectA isKindOfClass:[TTTDIConcreteSingleton class]], @"Requested object for mapped base class returns an instance of the concrete subclass.");
+    XCTAssertTrue([objectA isKindOfClass:[TTTDIConcreteSingleton class]], @"Requested object for mapped base class returns an instance of the concrete subclass.");
     
-    TTTDIBaseSingleton *objectB = [TTTDIBaseSingleton objectFromInjector:self.injector];
+    TTTDIBaseSingleton *objectB = [TTTDIBaseSingleton ttt_objectFromInjector:self.injector];
     
-    STAssertTrue(objectA == objectB, @"Consecutive requested singletons return the same object every time.");
+    XCTAssertTrue(objectA == objectB, @"Consecutive requested singletons return the same object every time.");
 }
 
 - (void)testObjectMapping
 {
-    NSArray *object = [NSArray objectFromInjector:self.injector];
+    NSArray *object = [NSArray ttt_objectFromInjector:self.injector];
     
-    STAssertEquals(object, self.existingObject, @"Requested object for object-mapping returns the existing object");
+    XCTAssertEqual(object, self.existingObject, @"Requested object for object-mapping returns the existing object");
 }
 
 - (void)testPropertyInjection
 {
-    TTTDIInjectableObject *injectable = [TTTDIInjectableObject objectFromInjector:self.injector];
+    TTTDIInjectableObject *injectable = [TTTDIInjectableObject ttt_objectFromInjector:self.injector];
                                          
-    STAssertTrue([injectable isKindOfClass:[TTTDIInjectableObject class]], @"Requested object for mapped class returns an instance of that class.");
+    XCTAssertTrue([injectable isKindOfClass:[TTTDIInjectableObject class]], @"Requested object for mapped class returns an instance of that class.");
                                          
-    STAssertTrue([injectable.simpleInjectedObject isKindOfClass:[TTTDISimpleObject class]], @"Property marked with the injectable protocol is injected with a proper object.");
+    XCTAssertTrue([injectable.simpleInjectedObject isKindOfClass:[TTTDISimpleObject class]], @"Property marked with the injectable protocol is injected with a proper object.");
     
-    STAssertNil(injectable.simpleNotInjectedObject, @"Property not marked with the injectable protocol is not injected, even if the property's type actually implements that protocol.");
+    XCTAssertNil(injectable.simpleNotInjectedObject, @"Property not marked with the injectable protocol is not injected, even if the property's type actually implements that protocol.");
 }
 
 - (void)testPropertyObjectInjection
 {
-    TTTDIInjectableObject *injectable = [TTTDIInjectableObject objectFromInjector:self.injector];
+    TTTDIInjectableObject *injectable = [TTTDIInjectableObject ttt_objectFromInjector:self.injector];
     
-    STAssertTrue(injectable.simpleList == self.simpleListObject, @"Object marked with the injectable protocol is injected with the proper object based on its name/identifier.");
+    XCTAssertTrue(injectable.simpleList == self.simpleListObject, @"Object marked with the injectable protocol is injected with the proper object based on its name/identifier.");
 }
 
 @end

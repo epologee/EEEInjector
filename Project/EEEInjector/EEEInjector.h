@@ -7,7 +7,3 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface EEEInjector : NSObject
-
-@end
