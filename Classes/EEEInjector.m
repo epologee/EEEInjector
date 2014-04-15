@@ -219,7 +219,7 @@ static EEEInjector *_currentInjector;
         // to be created implicitly, overwriting each other as values in the classMappings
         // dictionary. This @synchronized block prevents this to cause race conditions and
         // over-released mapping objects.
-        @synchronized (object)
+        @synchronized (self)
         {
             if (!mapping && self.allowImplicitMapping)
             {
