@@ -35,7 +35,6 @@ objc_AssociationPolicy EEEAssociationPolicyForProperty(objc_property_t property,
 
     [pairs enumerateObjectsUsingBlock:^(NSString *pair, NSUInteger idx, BOOL *stop) {
         NSString *attribute = [pair substringToIndex:1];
-        NSString *value = [pair substringFromIndex:1];
 
         if ([@"N" isEqualToString:attribute])
         {
@@ -81,9 +80,6 @@ Class EEEClassForProperty(objc_property_t property, NSArray **protocols) {
     NSString *attributes = [NSString stringWithUTF8String:property_getAttributes(property)];
     NSArray *pairs = [attributes componentsSeparatedByString:@","];
 
-    __block BOOL nonatomic = NO;
-    __block objc_AssociationPolicy association = OBJC_ASSOCIATION_ASSIGN;
-
     __block Class typeClass;
     NSMutableArray *typeProtocols = [NSMutableArray array];
 
@@ -93,9 +89,6 @@ Class EEEClassForProperty(objc_property_t property, NSArray **protocols) {
 
         if ([@"T" isEqualToString:attribute])
         {
-            // type encoding
-            NSString *typeEncoding = [value length] ? value : @"id";
-
             if ([@"@" isEqualToString:[value substringToIndex:1]])
             {
                 if ([value length] > 3)
