@@ -155,7 +155,7 @@ id EEEGetLazilyInjectedPropertyValue(NSObject *object, SEL _cmd) {
         objc_property_t property = class_getProperty([object class], utf8Key);
 
         id propertyClass = EEEClassForProperty(property, NULL);
-        result = [propertyClass eee_objectFromInjector:[EEEInjector currentInjector]];
+        result = [propertyClass eee_objectFromInjector:[EEEInjector currentInjector] withIdentifier:key];
 
         if (result)
         {
