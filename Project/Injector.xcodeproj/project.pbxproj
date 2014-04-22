@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		95DD391519067F0A00C68D0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD391419067F0A00C68D0B /* Foundation.framework */; };
+		95DD392319067F0B00C68D0B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD392219067F0B00C68D0B /* XCTest.framework */; };
+		95DD392419067F0B00C68D0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD391419067F0A00C68D0B /* Foundation.framework */; };
+		95DD392619067F0B00C68D0B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD392519067F0B00C68D0B /* UIKit.framework */; };
+		95DD392919067F0B00C68D0B /* libInjector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD391119067F0A00C68D0B /* libInjector.a */; };
+		95DD394A19067FB000C68D0B /* EEEInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD393C19067FB000C68D0B /* EEEInjector.m */; };
+		95DD394B19067FB000C68D0B /* EEEIntrospectProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD393F19067FB000C68D0B /* EEEIntrospectProperty.m */; };
+		95DD394C19067FB000C68D0B /* NSObject+EEELazyInjection.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD394419067FB000C68D0B /* NSObject+EEELazyInjection.m */; };
+		95DD394D19067FB000C68D0B /* EEEInjectionMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD394719067FB000C68D0B /* EEEInjectionMapping.m */; };
+		95DD39661906800300C68D0B /* EEEDIBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39501906800300C68D0B /* EEEDIBaseObject.m */; };
+		95DD39671906800300C68D0B /* EEEDIBaseSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39521906800300C68D0B /* EEEDIBaseSingleton.m */; };
+		95DD39681906800300C68D0B /* EEEDIConcreteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39541906800300C68D0B /* EEEDIConcreteObject.m */; };
+		95DD39691906800300C68D0B /* EEEDIConcreteSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39561906800300C68D0B /* EEEDIConcreteSingleton.m */; };
+		95DD396A1906800300C68D0B /* EEEDIInjectableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39581906800300C68D0B /* EEEDIInjectableObject.m */; };
+		95DD396B1906800300C68D0B /* EEEDISimpleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD395A1906800300C68D0B /* EEEDISimpleObject.m */; };
+		95DD396C1906800300C68D0B /* EEEDISimpleSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD395C1906800300C68D0B /* EEEDISimpleSingleton.m */; };
+		95DD396D1906800300C68D0B /* TSTLazyInjectionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD395E1906800300C68D0B /* TSTLazyInjectionSub.m */; };
+		95DD396E1906800300C68D0B /* TSTLazyInjectionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39601906800300C68D0B /* TSTLazyInjectionBase.m */; };
+		95DD396F1906800300C68D0B /* NSObject+EEELazyInjectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39621906800300C68D0B /* NSObject+EEELazyInjectionSpec.m */; };
+		95DD39701906800300C68D0B /* EEEDependencyInjectionTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39651906800300C68D0B /* EEEDependencyInjectionTestCase.m */; };
+		AAFD08D9DCCB4B60B7C04BE1 /* libPods-InjectorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 898AADA697BB40A6815FFBF7 /* libPods-InjectorTests.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		95DD392719067F0B00C68D0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95DD390919067F0A00C68D0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 95DD391019067F0A00C68D0B;
+			remoteInfo = Injector;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		95DD390F19067F0A00C68D0B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		898AADA697BB40A6815FFBF7 /* libPods-InjectorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InjectorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95DD391119067F0A00C68D0B /* libInjector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libInjector.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		95DD391419067F0A00C68D0B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		95DD391819067F0A00C68D0B /* Injector-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Injector-Prefix.pch"; sourceTree = "<group>"; };
+		95DD392119067F0B00C68D0B /* InjectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InjectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		95DD392219067F0B00C68D0B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		95DD392519067F0B00C68D0B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		95DD392C19067F0B00C68D0B /* InjectorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InjectorTests-Info.plist"; sourceTree = "<group>"; };
+		95DD393B19067FB000C68D0B /* EEEInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEInjector.h; sourceTree = "<group>"; };
+		95DD393C19067FB000C68D0B /* EEEInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEInjector.m; sourceTree = "<group>"; };
+		95DD393E19067FB000C68D0B /* EEEIntrospectProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEIntrospectProperty.h; sourceTree = "<group>"; };
+		95DD393F19067FB000C68D0B /* EEEIntrospectProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEIntrospectProperty.m; sourceTree = "<group>"; };
+		95DD394319067FB000C68D0B /* NSObject+EEELazyInjection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+EEELazyInjection.h"; sourceTree = "<group>"; };
+		95DD394419067FB000C68D0B /* NSObject+EEELazyInjection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+EEELazyInjection.m"; sourceTree = "<group>"; };
+		95DD394619067FB000C68D0B /* EEEInjectionMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEInjectionMapping.h; sourceTree = "<group>"; };
+		95DD394719067FB000C68D0B /* EEEInjectionMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEInjectionMapping.m; sourceTree = "<group>"; };
+		95DD394F1906800300C68D0B /* EEEDIBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDIBaseObject.h; sourceTree = "<group>"; };
+		95DD39501906800300C68D0B /* EEEDIBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDIBaseObject.m; sourceTree = "<group>"; };
+		95DD39511906800300C68D0B /* EEEDIBaseSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDIBaseSingleton.h; sourceTree = "<group>"; };
+		95DD39521906800300C68D0B /* EEEDIBaseSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDIBaseSingleton.m; sourceTree = "<group>"; };
+		95DD39531906800300C68D0B /* EEEDIConcreteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDIConcreteObject.h; sourceTree = "<group>"; };
+		95DD39541906800300C68D0B /* EEEDIConcreteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDIConcreteObject.m; sourceTree = "<group>"; };
+		95DD39551906800300C68D0B /* EEEDIConcreteSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDIConcreteSingleton.h; sourceTree = "<group>"; };
+		95DD39561906800300C68D0B /* EEEDIConcreteSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDIConcreteSingleton.m; sourceTree = "<group>"; };
+		95DD39571906800300C68D0B /* EEEDIInjectableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDIInjectableObject.h; sourceTree = "<group>"; };
+		95DD39581906800300C68D0B /* EEEDIInjectableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDIInjectableObject.m; sourceTree = "<group>"; };
+		95DD39591906800300C68D0B /* EEEDISimpleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDISimpleObject.h; sourceTree = "<group>"; };
+		95DD395A1906800300C68D0B /* EEEDISimpleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDISimpleObject.m; sourceTree = "<group>"; };
+		95DD395B1906800300C68D0B /* EEEDISimpleSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDISimpleSingleton.h; sourceTree = "<group>"; };
+		95DD395C1906800300C68D0B /* EEEDISimpleSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDISimpleSingleton.m; sourceTree = "<group>"; };
+		95DD395D1906800300C68D0B /* TSTLazyInjectionSub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTLazyInjectionSub.h; sourceTree = "<group>"; };
+		95DD395E1906800300C68D0B /* TSTLazyInjectionSub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTLazyInjectionSub.m; sourceTree = "<group>"; };
+		95DD395F1906800300C68D0B /* TSTLazyInjectionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTLazyInjectionBase.h; sourceTree = "<group>"; };
+		95DD39601906800300C68D0B /* TSTLazyInjectionBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTLazyInjectionBase.m; sourceTree = "<group>"; };
+		95DD39621906800300C68D0B /* NSObject+EEELazyInjectionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+EEELazyInjectionSpec.m"; sourceTree = "<group>"; };
+		95DD39641906800300C68D0B /* EEEDependencyInjectionTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDependencyInjectionTestCase.h; sourceTree = "<group>"; };
+		95DD39651906800300C68D0B /* EEEDependencyInjectionTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDependencyInjectionTestCase.m; sourceTree = "<group>"; };
+		B7FD61DC809E468DBEB93756 /* Pods-InjectorTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InjectorTests.xcconfig"; path = "Pods/Pods-InjectorTests.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		95DD390E19067F0A00C68D0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95DD391519067F0A00C68D0B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95DD391E19067F0B00C68D0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95DD392319067F0B00C68D0B /* XCTest.framework in Frameworks */,
+				95DD392919067F0B00C68D0B /* libInjector.a in Frameworks */,
+				95DD392619067F0B00C68D0B /* UIKit.framework in Frameworks */,
+				95DD392419067F0B00C68D0B /* Foundation.framework in Frameworks */,
+				AAFD08D9DCCB4B60B7C04BE1 /* libPods-InjectorTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		95DD390819067F0A00C68D0B = {
+			isa = PBXGroup;
+			children = (
+				95DD391619067F0A00C68D0B /* Injector */,
+				95DD392A19067F0B00C68D0B /* InjectorTests */,
+				95DD391319067F0A00C68D0B /* Frameworks */,
+				95DD391219067F0A00C68D0B /* Products */,
+				B7FD61DC809E468DBEB93756 /* Pods-InjectorTests.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		95DD391219067F0A00C68D0B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95DD391119067F0A00C68D0B /* libInjector.a */,
+				95DD392119067F0B00C68D0B /* InjectorTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		95DD391319067F0A00C68D0B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95DD391419067F0A00C68D0B /* Foundation.framework */,
+				95DD392219067F0B00C68D0B /* XCTest.framework */,
+				95DD392519067F0B00C68D0B /* UIKit.framework */,
+				898AADA697BB40A6815FFBF7 /* libPods-InjectorTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		95DD391619067F0A00C68D0B /* Injector */ = {
+			isa = PBXGroup;
+			children = (
+				95DD393A19067FB000C68D0B /* Classes */,
+				95DD391719067F0A00C68D0B /* Supporting Files */,
+			);
+			path = Injector;
+			sourceTree = "<group>";
+		};
+		95DD391719067F0A00C68D0B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				95DD391819067F0A00C68D0B /* Injector-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		95DD392A19067F0B00C68D0B /* InjectorTests */ = {
+			isa = PBXGroup;
+			children = (
+				95DD394E1906800300C68D0B /* Helpers */,
+				95DD39611906800300C68D0B /* Specs */,
+				95DD39631906800300C68D0B /* Tests */,
+				95DD392B19067F0B00C68D0B /* Supporting Files */,
+			);
+			path = InjectorTests;
+			sourceTree = "<group>";
+		};
+		95DD392B19067F0B00C68D0B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				95DD392C19067F0B00C68D0B /* InjectorTests-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		95DD393A19067FB000C68D0B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				95DD393B19067FB000C68D0B /* EEEInjector.h */,
+				95DD393C19067FB000C68D0B /* EEEInjector.m */,
+				95DD393D19067FB000C68D0B /* Introspection */,
+				95DD394219067FB000C68D0B /* LazyInjections */,
+				95DD394519067FB000C68D0B /* Mappings */,
+			);
+			name = Classes;
+			path = ../../Classes;
+			sourceTree = "<group>";
+		};
+		95DD393D19067FB000C68D0B /* Introspection */ = {
+			isa = PBXGroup;
+			children = (
+				95DD393E19067FB000C68D0B /* EEEIntrospectProperty.h */,
+				95DD393F19067FB000C68D0B /* EEEIntrospectProperty.m */,
+			);
+			path = Introspection;
+			sourceTree = "<group>";
+		};
+		95DD394219067FB000C68D0B /* LazyInjections */ = {
+			isa = PBXGroup;
+			children = (
+				95DD394319067FB000C68D0B /* NSObject+EEELazyInjection.h */,
+				95DD394419067FB000C68D0B /* NSObject+EEELazyInjection.m */,
+			);
+			path = LazyInjections;
+			sourceTree = "<group>";
+		};
+		95DD394519067FB000C68D0B /* Mappings */ = {
+			isa = PBXGroup;
+			children = (
+				95DD394619067FB000C68D0B /* EEEInjectionMapping.h */,
+				95DD394719067FB000C68D0B /* EEEInjectionMapping.m */,
+			);
+			path = Mappings;
+			sourceTree = "<group>";
+		};
+		95DD394E1906800300C68D0B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				95DD394F1906800300C68D0B /* EEEDIBaseObject.h */,
+				95DD39501906800300C68D0B /* EEEDIBaseObject.m */,
+				95DD39511906800300C68D0B /* EEEDIBaseSingleton.h */,
+				95DD39521906800300C68D0B /* EEEDIBaseSingleton.m */,
+				95DD39531906800300C68D0B /* EEEDIConcreteObject.h */,
+				95DD39541906800300C68D0B /* EEEDIConcreteObject.m */,
+				95DD39551906800300C68D0B /* EEEDIConcreteSingleton.h */,
+				95DD39561906800300C68D0B /* EEEDIConcreteSingleton.m */,
+				95DD39571906800300C68D0B /* EEEDIInjectableObject.h */,
+				95DD39581906800300C68D0B /* EEEDIInjectableObject.m */,
+				95DD39591906800300C68D0B /* EEEDISimpleObject.h */,
+				95DD395A1906800300C68D0B /* EEEDISimpleObject.m */,
+				95DD395B1906800300C68D0B /* EEEDISimpleSingleton.h */,
+				95DD395C1906800300C68D0B /* EEEDISimpleSingleton.m */,
+				95DD395D1906800300C68D0B /* TSTLazyInjectionSub.h */,
+				95DD395E1906800300C68D0B /* TSTLazyInjectionSub.m */,
+				95DD395F1906800300C68D0B /* TSTLazyInjectionBase.h */,
+				95DD39601906800300C68D0B /* TSTLazyInjectionBase.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		95DD39611906800300C68D0B /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				95DD39621906800300C68D0B /* NSObject+EEELazyInjectionSpec.m */,
+			);
+			path = Specs;
+			sourceTree = "<group>";
+		};
+		95DD39631906800300C68D0B /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				95DD39641906800300C68D0B /* EEEDependencyInjectionTestCase.h */,
+				95DD39651906800300C68D0B /* EEEDependencyInjectionTestCase.m */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		95DD391019067F0A00C68D0B /* Injector */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95DD393419067F0B00C68D0B /* Build configuration list for PBXNativeTarget "Injector" */;
+			buildPhases = (
+				95DD390D19067F0A00C68D0B /* Sources */,
+				95DD390E19067F0A00C68D0B /* Frameworks */,
+				95DD390F19067F0A00C68D0B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Injector;
+			productName = Injector;
+			productReference = 95DD391119067F0A00C68D0B /* libInjector.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		95DD392019067F0B00C68D0B /* InjectorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95DD393719067F0B00C68D0B /* Build configuration list for PBXNativeTarget "InjectorTests" */;
+			buildPhases = (
+				77B98E46A223401B9DE95EE2 /* Check Pods Manifest.lock */,
+				95DD391D19067F0B00C68D0B /* Sources */,
+				95DD391E19067F0B00C68D0B /* Frameworks */,
+				95DD391F19067F0B00C68D0B /* Resources */,
+				A4698B2B5EE54B3E9BCF3C4F /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				95DD392819067F0B00C68D0B /* PBXTargetDependency */,
+			);
+			name = InjectorTests;
+			productName = InjectorTests;
+			productReference = 95DD392119067F0B00C68D0B /* InjectorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		95DD390919067F0A00C68D0B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = epologee;
+			};
+			buildConfigurationList = 95DD390C19067F0A00C68D0B /* Build configuration list for PBXProject "Injector" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 95DD390819067F0A00C68D0B;
+			productRefGroup = 95DD391219067F0A00C68D0B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				95DD391019067F0A00C68D0B /* Injector */,
+				95DD392019067F0B00C68D0B /* InjectorTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		95DD391F19067F0B00C68D0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		77B98E46A223401B9DE95EE2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A4698B2B5EE54B3E9BCF3C4F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-InjectorTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		95DD390D19067F0A00C68D0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95DD394A19067FB000C68D0B /* EEEInjector.m in Sources */,
+				95DD394B19067FB000C68D0B /* EEEIntrospectProperty.m in Sources */,
+				95DD394D19067FB000C68D0B /* EEEInjectionMapping.m in Sources */,
+				95DD394C19067FB000C68D0B /* NSObject+EEELazyInjection.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95DD391D19067F0B00C68D0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95DD39671906800300C68D0B /* EEEDIBaseSingleton.m in Sources */,
+				95DD39661906800300C68D0B /* EEEDIBaseObject.m in Sources */,
+				95DD396C1906800300C68D0B /* EEEDISimpleSingleton.m in Sources */,
+				95DD396A1906800300C68D0B /* EEEDIInjectableObject.m in Sources */,
+				95DD396F1906800300C68D0B /* NSObject+EEELazyInjectionSpec.m in Sources */,
+				95DD39681906800300C68D0B /* EEEDIConcreteObject.m in Sources */,
+				95DD39691906800300C68D0B /* EEEDIConcreteSingleton.m in Sources */,
+				95DD39701906800300C68D0B /* EEEDependencyInjectionTestCase.m in Sources */,
+				95DD396E1906800300C68D0B /* TSTLazyInjectionBase.m in Sources */,
+				95DD396D1906800300C68D0B /* TSTLazyInjectionSub.m in Sources */,
+				95DD396B1906800300C68D0B /* EEEDISimpleObject.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		95DD392819067F0B00C68D0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 95DD391019067F0A00C68D0B /* Injector */;
+			targetProxy = 95DD392719067F0B00C68D0B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		95DD393219067F0B00C68D0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		95DD393319067F0B00C68D0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		95DD393519067F0B00C68D0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Injector.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Injector/Injector-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		95DD393619067F0B00C68D0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Injector.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Injector/Injector-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		95DD393819067F0B00C68D0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7FD61DC809E468DBEB93756 /* Pods-InjectorTests.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Injector/Injector-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "InjectorTests/InjectorTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		95DD393919067F0B00C68D0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7FD61DC809E468DBEB93756 /* Pods-InjectorTests.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Injector/Injector-Prefix.pch";
+				INFOPLIST_FILE = "InjectorTests/InjectorTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		95DD390C19067F0A00C68D0B /* Build configuration list for PBXProject "Injector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95DD393219067F0B00C68D0B /* Debug */,
+				95DD393319067F0B00C68D0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		95DD393419067F0B00C68D0B /* Build configuration list for PBXNativeTarget "Injector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95DD393519067F0B00C68D0B /* Debug */,
+				95DD393619067F0B00C68D0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		95DD393719067F0B00C68D0B /* Build configuration list for PBXNativeTarget "InjectorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95DD393819067F0B00C68D0B /* Debug */,
+				95DD393919067F0B00C68D0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 95DD390919067F0A00C68D0B /* Project object */;
+}

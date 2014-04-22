@@ -3,26 +3,42 @@
 #import "EEEInjector.h"
 #import "EEEIntrospectProperty.h"
 
-NSString *EEEKeyWithSetterName(NSString *setter) {
-    if ([setter length] >= 4)
+NSString *EEEPropertyNameFromSetter(SEL setter) {
+    NSString *selectorString = NSStringFromSelector(setter);
+    if ([selectorString length] >= 5)
     {
-        NSMutableString *key = [NSMutableString string];
-        [key appendString:[[setter substringWithRange:NSMakeRange(3, 1)] lowercaseString]];
-        [key appendString:[setter substringWithRange:NSMakeRange(4, setter.length - 4)]];
-        return key;
+        NSMutableString *propertyName = [NSMutableString string];
+        [propertyName appendString:[[selectorString substringWithRange:NSMakeRange(3, 1)] lowercaseString]];
+        [propertyName appendString:[selectorString substringWithRange:NSMakeRange(4, selectorString.length - 5)]];
+
+        return propertyName;
     }
     else
     {
-        [NSException raise:NSInvalidArgumentException format:@"setter name should be at least 5 characters long"];
+        [NSException raise:NSInvalidArgumentException format:@"The setter should include `set` and the colon `:`, thus a minimal length of 5 characters"];
         return nil;
     }
 }
 
-NSString *EEESetterNameWithKey(NSString *key) {
+NSString *EEEPropertyNameFromGetter(SEL getter) {
+    NSString *propertyName = NSStringFromSelector(getter);
+    if ([propertyName rangeOfString:@":"].location != NSNotFound)
+    {
+        [[NSAssertionHandler currentHandler] handleFailureInFunction:@"EEEPropertyNameFromGetter"
+                                                                file:[NSString stringWithUTF8String:__FILE__]
+                                                          lineNumber:__LINE__
+                                                         description:@"Invalid getter format, includes arguments: `%@`", propertyName];
+    }
+
+    return propertyName;
+}
+
+SEL EEESetterForPropertyName(NSString *propertyName) {
     NSMutableString *setter = [NSMutableString stringWithString:@"set"];
-    [setter appendString:[[key substringWithRange:NSMakeRange(0, 1)] uppercaseString]];
-    [setter appendString:[key substringWithRange:NSMakeRange(1, key.length - 1)]];
-    return setter;
+    [setter appendString:[[propertyName substringWithRange:NSMakeRange(0, 1)] uppercaseString]];
+    [setter appendString:[propertyName substringWithRange:NSMakeRange(1, propertyName.length - 1)]];
+    [setter appendString:@":"];
+    return NSSelectorFromString(setter);
 }
 
 objc_AssociationPolicy EEEAssociationPolicyForProperty(objc_property_t property, char const *key) {
@@ -126,41 +142,40 @@ Class EEEClassForProperty(objc_property_t property, NSArray **protocols) {
 }
 
 /// Dynamically added setter `set<PropertyName>:`
-void EEESetPropertyValueAsAssociatedObject(NSObject *object, SEL _cmd, id value) {
+void EEESetPropertyValueAsAssociatedObject(id object, SEL _cmd, id value) {
     Class objectClass = [object class];
-    NSString *selector = NSStringFromSelector(_cmd);
-    NSString *key = EEEKeyWithSetterName(selector);
-    char const *utf8Key = [key UTF8String];
+    NSString *propertyName = EEEPropertyNameFromSetter(_cmd);
+    SEL associationKey = NSSelectorFromString(propertyName);
 
-    objc_property_t property = class_getProperty(objectClass, utf8Key);
+    objc_property_t property = class_getProperty(objectClass, sel_getName(associationKey));
 
     if (property)
     {
-        objc_AssociationPolicy association = EEEAssociationPolicyForProperty(property, utf8Key);
-        [object willChangeValueForKey:key];
-        objc_setAssociatedObject(object, utf8Key, value, association);
-        [object didChangeValueForKey:key];
+        objc_AssociationPolicy association = EEEAssociationPolicyForProperty(property, sel_getName(associationKey));
+        [object willChangeValueForKey:propertyName];
+        objc_setAssociatedObject(object, associationKey, value, association);
+        [object didChangeValueForKey:propertyName];
     }
 }
 
 /// Dynamically added getter `<PropertyName>`
-id EEEGetLazilyInjectedPropertyValue(NSObject *object, SEL _cmd) {
-    NSString *key = NSStringFromSelector(_cmd);
-    char const *utf8Key = [key UTF8String];
+id EEEGetLazilyInjectedPropertyValue(id object, SEL _cmd) {
+    NSString *propertyName = EEEPropertyNameFromGetter(_cmd);
+    SEL associationKey = NSSelectorFromString(propertyName);
 
-    id result = objc_getAssociatedObject(object, utf8Key);
+    id result = objc_getAssociatedObject(object, sel_getName(associationKey));
 
     if (!result)
     {
-        objc_property_t property = class_getProperty([object class], utf8Key);
+        Class objectClass = [object class];
+        objc_property_t property = class_getProperty(objectClass, [propertyName UTF8String]);
 
         id propertyClass = EEEClassForProperty(property, NULL);
-        result = [propertyClass eee_objectFromInjector:[EEEInjector currentInjector] withIdentifier:key];
+        result = [propertyClass eee_objectFromInjector:[EEEInjector currentInjector] withIdentifier:propertyName];
 
         if (result)
         {
-            SEL setter = NSSelectorFromString(EEESetterNameWithKey(key));
-            EEESetPropertyValueAsAssociatedObject(object, setter, result);
+            EEESetPropertyValueAsAssociatedObject(object, EEESetterForPropertyName(propertyName), result);
         }
     }
 
@@ -169,36 +184,43 @@ id EEEGetLazilyInjectedPropertyValue(NSObject *object, SEL _cmd) {
 
 @implementation NSObject (EEELazyInjection)
 
-+ (BOOL)eee_setupLazyInjectionForDynamicProperties
++ (void)eee_setupLazyInjectionForDynamicProperties
 {
-    __block BOOL addedGetter = NO;
-    __block BOOL addedSetter = NO;
-
     [[EEEIntrospectProperty propertiesOfClass:self] enumerateObjectsUsingBlock:^(EEEIntrospectProperty *property, NSUInteger idx, BOOL *stop) {
         if (property.isObject && property.dynamicFlag)
         {
             NSAssert(property.customSetter == nil, @"Custom setters are not supported");
             NSAssert(property.customGetter == nil, @"Custom getters are not supported");
 
-            SEL setter = NSSelectorFromString(EEESetterNameWithKey(property.name));
-            SEL getter = NSSelectorFromString(property.name);
-
-            BOOL requiresSetter = class_getInstanceMethod([self class], setter) == NULL;
-            BOOL requiresGetter = class_getInstanceMethod([self class], getter) == NULL;
-
-            if (requiresGetter && requiresSetter)
+            SEL setter = EEESetterForPropertyName(property.name);
+            Method existingSetter = class_getInstanceMethod(self, setter);
+            BOOL requiresSetter = existingSetter == NULL;
+            if (!requiresSetter)
             {
-                char const *setterTypes = [[NSString stringWithFormat:@"v@:%@@", property.typeEncoding] UTF8String];
-                addedSetter = class_addMethod([self class], setter, (IMP) EEESetPropertyValueAsAssociatedObject, setterTypes);
-                if (addedSetter)
-                {
-                    addedGetter = class_addMethod([self class], getter, (IMP) EEEGetLazilyInjectedPropertyValue, "@@:");
-                }
+                return;
+            }
+
+            BOOL addedSetter = class_addMethod(self, setter, (IMP) EEESetPropertyValueAsAssociatedObject, "v@:@");
+            if (!addedSetter)
+            {
+                return;
+            }
+
+            SEL getter = NSSelectorFromString(property.name);
+            Method existingGetter = class_getInstanceMethod(self, getter);
+            BOOL requiresGetter = existingGetter == NULL;
+            if (!requiresGetter)
+            {
+                return;
+            }
+
+            BOOL addedGetter = class_addMethod(self, getter, (IMP) EEEGetLazilyInjectedPropertyValue, "@@:");
+            if (!addedGetter)
+            {
+                return;
             }
         }
     }];
-
-    return addedGetter && addedSetter;
 }
 
 @end

@@ -1,7 +1,10 @@
-target "EEEInjector" do
-  pod "EEEInjector", :path => "../"
+platform :ios, '7.0'
+
+target "Injector", :exclusive => true do
+  # pod "EEEInjector"
+  # pod "EEEOperationCenter", :path => "../"
 end
 
-target "EEEInjectorTests" do
+target "InjectorTests", :exclusive => true do
   pod "Kiwi/XCTest"
 end
