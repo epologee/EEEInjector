@@ -2,6 +2,6 @@
 
 @interface NSObject (EEELazyInjection)
 
-+ (BOOL)eee_setupLazyInjectionForDynamicProperties;
++ (void)eee_setupLazyInjectionForDynamicProperties;
 
 @end
