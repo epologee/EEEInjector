@@ -17,9 +17,10 @@ SPEC_BEGIN(NSObject_EEELazyInjectionSpec)
 
                 beforeEach(^{
                     date = [NSDate date];
-                    [[injector mapClass:[NSDate class] overwriteExisting:YES] toObject:date];
-                    [[injector mapClass:[NSString class] withIdentifier:@"stringPropertyInSubClass" overwriteExisting:YES] toObject:@"Concrete"];
-                    [[injector mapClass:[NSString class] withIdentifier:@"stringPropertyInBaseClass" overwriteExisting:YES] toObject:@"Abstract"];
+                    injector.mapClass([NSDate class]).toObject(date);
+                    injector.mapClass([NSString class]).toObject(date);
+                    injector.mapClassWithIdentifier([NSString class], @"stringPropertyInSubClass").toObject(@"Concrete");
+                    injector.mapClassWithIdentifier([NSString class], @"stringPropertyInBaseClass").toObject(@"Abstract");
                 });
 
                 it(@"injects properties from the subclass", ^{

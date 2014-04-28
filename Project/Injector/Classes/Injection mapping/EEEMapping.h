@@ -1,10 +1,13 @@
 #import <Foundation/Foundation.h>
-#import "EEEBlockChainMappingObject.h"
+#import "EEEBlockChainMapping.h"
 
 @interface EEEMapping : NSObject <EEEMappingParent>
 
 @property(nonatomic, strong, readonly) Class targetClass;
 @property(nonatomic, strong, readonly) id targetObject;
-@property(nonatomic, strong, readonly) NSMutableDictionary *injectables;
+
++ (id <EEEClassBlockChainMappingStart>)mapClass:(Class)mappedClass parent:(id <EEEMappingParent>)parent;
+
++ (id <EEEProtocolBlockChainMappingStart>)mapProtocol:(Protocol *)mappedProtocol parent:(id <EEEMappingParent>)parent;
 
 @end

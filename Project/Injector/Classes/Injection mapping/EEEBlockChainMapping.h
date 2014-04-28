@@ -18,41 +18,37 @@ typedef enum
 
 @end
 
-@protocol EEEBlockChainMappingObject <EEEBlockChainMappingEnd>
+@protocol EEEBlockChainMapping <EEEBlockChainMappingEnd>
 
 @property(nonatomic, readonly) id <EEEBlockChainMappingVoid> (^keepReference)(BOOL enabled);
 
 @end
 
-@protocol EEEBlockChainMappingStart <EEEBlockChainMappingObject>
+@protocol EEEBlockChainMappingStart <EEEBlockChainMapping>
 
 @property(nonatomic, readonly) id <EEEBlockChainMappingEnd> (^toObject)(id object);
 
 typedef id (^EEEInjectionBlock)();
 
-@property(nonatomic, readonly) id <EEEBlockChainMappingObject> (^toBlock)(EEEInjectionBlock block);
+@property(nonatomic, readonly) id <EEEBlockChainMapping> (^toBlock)(EEEInjectionBlock block);
 
 @end
 
 @protocol EEEClassBlockChainMappingStart <EEEBlockChainMappingStart>
 
-@property(nonatomic, readonly) id <EEEBlockChainMappingObject> (^toSubclass)(Class subclass);
+@property(nonatomic, readonly) id <EEEBlockChainMapping> (^toSubclass)(Class subclass);
 
 @end
 
 @protocol EEEProtocolBlockChainMappingStart <EEEBlockChainMappingStart>
 
-@property(nonatomic, readonly) id <EEEBlockChainMappingObject> (^toConformingClass)(Class conformingClass);
+@property(nonatomic, readonly) id <EEEBlockChainMapping> (^toConformingClass)(Class conformingClass);
 
 @end
 
 @class EEEMapping;
 
 @protocol EEEMappingParent <NSObject>
-
-+ (id <EEEClassBlockChainMappingStart>)mapClass:(Class)mappedClass;
-
-+ (id <EEEProtocolBlockChainMappingStart>)mapProtocol:(Protocol *)mappedProtocol;
 
 - (void)removeChildMapping:(EEEMapping *)mapping;
 

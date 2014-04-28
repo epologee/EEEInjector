@@ -11,7 +11,6 @@
 #import "TSTMappable.h"
 #import "TSTMappableConformingObject.h"
 #import "TSTNonConformingObject.h"
-#import "TSTConformingObject.h"
 
 SPEC_BEGIN(EEEMappingSpec)
 
@@ -23,7 +22,7 @@ SPEC_BEGIN(EEEMappingSpec)
 
                 describe(@"to object", ^{
                     beforeEach(^{
-                        mapping = [EEEMapping mapClass:[NSNumber class]];
+                        mapping = [EEEMapping mapClass:[NSNumber class] parent:nil ];
                     });
 
                     it(@"returns a target object", ^{
@@ -41,7 +40,7 @@ SPEC_BEGIN(EEEMappingSpec)
 
                 describe(@"to subclass", ^{
                     beforeEach(^{
-                        mapping = [EEEMapping mapClass:[NSArray class]];
+                        mapping = [EEEMapping mapClass:[NSArray class] parent:nil ];
                     });
 
                     it(@"returns a target object", ^{
@@ -73,7 +72,7 @@ SPEC_BEGIN(EEEMappingSpec)
 
                 describe(@"to block", ^{
                     beforeEach(^{
-                        mapping = [EEEMapping mapClass:[NSNumber class]];
+                        mapping = [EEEMapping mapClass:[NSNumber class] parent:nil ];
                     });
 
                     it(@"returns the object from the block", ^{
@@ -101,7 +100,7 @@ SPEC_BEGIN(EEEMappingSpec)
 
                 describe(@"throw exceptions when incorrectly combining mapping chains", ^{
                     beforeEach(^{
-                        mapping = [EEEMapping mapClass:[NSNumber class]];
+                        mapping = [EEEMapping mapClass:[NSNumber class] parent:nil ];
                     });
 
                     specify(^{
@@ -142,13 +141,13 @@ SPEC_BEGIN(EEEMappingSpec)
 
                     specify(^{
                         [[theBlock(^{
-                            ((id <EEEBlockChainMappingObject>) mapping.toSubclass([NSMutableArray class]).keepReference(YES)).removeAfterUse(YES);
+                            ((id <EEEBlockChainMapping>) mapping.toSubclass([NSMutableArray class]).keepReference(YES)).removeAfterUse(YES);
                         }) should] raise];
                     });
 
                     specify(^{
                         [[theBlock(^{
-                            ((id <EEEBlockChainMappingObject>) mapping.toSubclass([NSMutableArray class]).removeAfterUse(YES)).keepReference(YES);
+                            ((id <EEEBlockChainMapping>) mapping.toSubclass([NSMutableArray class]).removeAfterUse(YES)).keepReference(YES);
                         }) should] raise];
                     });
                 });
@@ -159,7 +158,7 @@ SPEC_BEGIN(EEEMappingSpec)
 
                 describe(@"to object", ^{
                     beforeEach(^{
-                        mapping = [EEEMapping mapProtocol:@protocol(TSTMappable)];
+                        mapping = [EEEMapping mapProtocol:@protocol(TSTMappable) parent:nil ];
                     });
 
                     it(@"returns a target object, regardless of conformity", ^{
@@ -170,7 +169,7 @@ SPEC_BEGIN(EEEMappingSpec)
 
                 context(@"to conforming class", ^{
                     beforeEach(^{
-                        mapping = [EEEMapping mapProtocol:@protocol(TSTMappable)];
+                        mapping = [EEEMapping mapProtocol:@protocol(TSTMappable) parent:nil ];
                     });
 
                     it(@"returns a target object", ^{
@@ -186,14 +185,25 @@ SPEC_BEGIN(EEEMappingSpec)
 
                 describe(@"to block", ^{
                     beforeEach(^{
-                        mapping = [EEEMapping mapProtocol:@protocol(TSTMappable)];
+                        mapping = [EEEMapping mapProtocol:@protocol(TSTMappable) parent:nil ];
                     });
 
                     it(@"returns the block object", ^{
                         __block id uniqueObject = nil;
 
                         mapping.toBlock(^id {
-                            uniqueObject = [[TSTConformingObject alloc] init];
+                            uniqueObject = [[TSTMappableConformingObject alloc] init];
+                            return uniqueObject;
+                        });
+
+                        [[[(EEEMapping *) mapping targetObject] should] equal:uniqueObject];
+                    });
+
+                    it(@"does not care about the block return object's type", ^{
+                        __block id uniqueObject = nil;
+
+                        mapping.toBlock(^id {
+                            uniqueObject = [[TSTNonConformingObject alloc] init];
                             return uniqueObject;
                         });
 

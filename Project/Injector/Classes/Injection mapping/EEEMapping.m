@@ -13,20 +13,23 @@
 
 @end
 
+@interface EEEMapping (BlockChain) <EEEClassBlockChainMappingStart, EEEProtocolBlockChainMappingStart>
+@end
+
 @implementation EEEMapping
 
-+ (id <EEEClassBlockChainMappingStart>)mapClass:(Class)mappedClass
++ (id <EEEClassBlockChainMappingStart>)mapClass:(Class)mappedClass parent:(id <EEEMappingParent>)parent
 {
     EEEMapping *mapping = [[self alloc] init];
-    mapping.mappedClass = mappedClass;
-    return mapping;
+    mapping.parent = parent;
+    return [mapping mapClass:mappedClass];
 }
 
-+ (id <EEEProtocolBlockChainMappingStart>)mapProtocol:(Protocol *)mappedProtocol
++ (id <EEEProtocolBlockChainMappingStart>)mapProtocol:(Protocol *)mappedProtocol parent:(id <EEEMappingParent>)parent
 {
     EEEMapping *mapping = [[self alloc] init];
-    mapping.mappedProtocol = mappedProtocol;
-    return mapping;
+    mapping.parent = parent;
+    return [mapping mapProtocol:mappedProtocol];
 }
 
 - (id)init
@@ -38,6 +41,18 @@
         self.options = EEEBlockChainOptionNone;
     }
 
+    return self;
+}
+
+- (id <EEEClassBlockChainMappingStart>)mapClass:(Class)mappedClass
+{
+    self.mappedClass = mappedClass;
+    return self;
+}
+
+- (id <EEEProtocolBlockChainMappingStart>)mapProtocol:(Protocol *)mappedProtocol
+{
+    self.mappedProtocol = mappedProtocol;
     return self;
 }
 
@@ -113,9 +128,6 @@
 
 @end
 
-@interface EEEMapping (BlockChain) <EEEClassBlockChainMappingStart, EEEProtocolBlockChainMappingStart>
-@end
-
 @implementation EEEMapping (BlockChain)
 
 - (id <EEEBlockChainMappingEnd> (^)(id))toObject
@@ -128,9 +140,9 @@
     };
 }
 
-- (id <EEEBlockChainMappingObject> (^)(Class))toConformingClass
+- (id <EEEBlockChainMapping> (^)(Class))toConformingClass
 {
-    return ^id <EEEBlockChainMappingObject>(Class conformingClass) {
+    return ^id <EEEBlockChainMapping>(Class conformingClass) {
         if (![conformingClass conformsToProtocol:self.mappedProtocol])
         {
             [[NSException exceptionWithName:@"EEEMapping"
@@ -145,11 +157,11 @@
     };
 }
 
-- (id <EEEBlockChainMappingObject> (^)(Class))toSubclass
+- (id <EEEBlockChainMapping> (^)(Class))toSubclass
 {
     NSParameterAssert(_targetObject == nil);
     NSParameterAssert(_targetBlock == nil);
-    return ^id <EEEBlockChainMappingObject>(Class subclass) {
+    return ^id <EEEBlockChainMapping>(Class subclass) {
         EEEMapping *childMapping = [[EEEMapping alloc] init];
         childMapping.mappedClass = subclass;
         childMapping.parent = self;
@@ -158,11 +170,11 @@
     };
 }
 
-- (id <EEEBlockChainMappingObject> (^)(EEEInjectionBlock))toBlock
+- (id <EEEBlockChainMapping> (^)(EEEInjectionBlock))toBlock
 {
     NSParameterAssert(_targetObject == nil);
     NSParameterAssert(![_parent isKindOfClass:[self class]]);
-    return ^id <EEEBlockChainMappingObject>(EEEInjectionBlock block) {
+    return ^id <EEEBlockChainMapping>(EEEInjectionBlock block) {
         self.targetBlock = block;
         return self;
     };
