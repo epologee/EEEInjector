@@ -32,19 +32,31 @@
  */
 @protocol EEEInjectionMapper
 
-- (id <EEEInjectionMappingStart>)mapClass:(Class)class;
+- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class;
 
-- (id <EEEInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier;
+- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier;
 
-- (id <EEEInjectionMappingStart>)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting;
+- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting;
 
-- (id <EEEInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting;
+- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting;
 
 - (void)unmapClass:(Class)class;
 
 - (void)unmapClass:(Class)class withIdentifier:(NSString *)identifier;
 
 - (EEEInjector *)asInjector;
+
+@end
+
+@protocol EEEInjectorInternals
+
+- (id)objectForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier;
+
+- (EEEInjectionMapping *)mappingForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier;
+
+- (id)objectForMappedProtocol:(Protocol *)mappedProtocol withIdentifier:(NSString *)identifier;
+
+- (EEEInjectionMapping *)mappingForMappedProtocol:(Protocol *)mappedClass withIdentifier:(NSString *)identifier;
 
 @end
 
@@ -72,6 +84,7 @@
 
 - (id)injectPropertiesIntoObject:(id)object;
 
+- (id <EEEProtocolInjectionMappingStart>)mapProtocol:(Protocol *)protocol;
 @end
 
 /**

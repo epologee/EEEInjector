@@ -36,6 +36,7 @@
 @property(nonatomic, strong, readwrite) EEEInjectionBlock targetBlock;
 @property(nonatomic, readonly) EEEInjectionMapping *endMapping;
 @property(nonatomic, strong) NSMutableDictionary *injectables;
+@property(nonatomic, strong) Protocol *mappedProtocol;
 
 @end
 
@@ -72,6 +73,31 @@
     return self;
 }
 
+- (id)initWithParent:(id <EEEInjectionMappingParent>)parent mappedProtocol:(Protocol *)mappedProtocol options:(EEETerminationOption)options
+{
+    self = [super init];
+
+    if (self)
+    {
+        self.parent = parent;
+        self.mappedProtocol = mappedProtocol;
+        self.options = options;
+        self.injectables = [NSMutableDictionary dictionary];
+        {
+            NSArray *properties = [EEEIntrospectProperty propertiesOfProtocol:mappedProtocol];
+            for (EEEIntrospectProperty *prop in properties)
+            {
+                if (prop.isObject && [prop implementsProtocol:@protocol(EEEInjectable)])
+                {
+                    self.injectables[prop.name] = prop.typeClass;
+                }
+            }
+        }
+    }
+
+    return self;
+}
+
 - (id <EEEInjectionMappingEnd>)toObject:(id)object
 {
     self.targetObject = object;
@@ -84,6 +110,13 @@
     self.targetBlock = block;
     [self assertIntegrity];
     return self;
+}
+
+#pragma mark Protocol mapping target
+
+- (id <EEEInjectionMapping>)toConformingClass:(Class)class
+{
+    return [self toSubclass:class];
 }
 
 #pragma mark Class mapping target
@@ -185,7 +218,12 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p mapped='%@'>%@</%@>", [self class], &self, self.mappedClass, self.childMapping ?: @"no child mapping", [self class]];
+    return [NSString stringWithFormat:@"<%@: %p mapped='%@'>%@</%@>",
+                                      [self class],
+                                      &self,
+                                      self.mappedClass,
+                                      self.childMapping ?: @"no child mapping",
+                                      [self class]];
 }
 
 @end

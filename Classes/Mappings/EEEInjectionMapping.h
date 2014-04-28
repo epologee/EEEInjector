@@ -38,21 +38,32 @@
 
 @protocol EEEInjectionMappingStart <EEEInjectionMapping>
 
-- (id <EEEInjectionMapping>)toSubclass:(Class)class;
-
 - (id <EEEInjectionMappingEnd>)toObject:(id)object;
 
 typedef id (^EEEInjectionBlock)();
+
 - (id <EEEInjectionMappingEnd>)toBlock:(EEEInjectionBlock)block;
+
+@end
+
+@protocol EEEClassInjectionMappingStart <EEEInjectionMappingStart>
+
+- (id <EEEInjectionMapping>)toSubclass:(Class)class;
+
+@end
+
+@protocol EEEProtocolInjectionMappingStart <EEEInjectionMappingStart>
+
+- (id <EEEInjectionMapping>)toConformingClass:(Class)class;
 
 @end
 
 typedef enum
 {
-	EEETerminationOptionNone = 0,
-	EEETerminationOptionSingleServing = 1 << 0, // unmap after calling `object` or `targetClass`.
-	EEETerminationOptionSingleton = 1 << 1, // alloc/init singleton. The opposite performs alloc/init every time.
-	EEETerminationOptionAllocOnly = 1 << 2 // object can't be called on a mapping like this.
+    EEETerminationOptionNone = 0,
+    EEETerminationOptionSingleServing = 1 << 0, // unmap after calling `object` or `targetClass`.
+    EEETerminationOptionSingleton = 1 << 1, // alloc/init singleton. The opposite performs alloc/init every time.
+    EEETerminationOptionAllocOnly = 1 << 2 // object can't be called on a mapping like this.
 } EEETerminationOption;
 
 @protocol EEEInjectionMappingParent <NSObject>
@@ -61,13 +72,22 @@ typedef enum
 
 @end
 
-@interface EEEInjectionMapping : NSObject <EEEInjectionMappingStart, EEEInjectionMappingParent>
+@interface EEEInjectionMapping : NSObject
 
-@property (nonatomic, strong, readonly) Class targetClass;
-@property (nonatomic, strong, readonly) id targetObject;
-@property (nonatomic, strong, readonly) NSMutableDictionary *injectables;
+@property(nonatomic, strong, readonly) Class targetClass;
+@property(nonatomic, strong, readonly) id targetObject;
+@property(nonatomic, strong, readonly) NSMutableDictionary *injectables;
 
 - (id)initWithParent:(id <EEEInjectionMappingParent>)parent mappedClass:(Class)mappedClass options:(EEETerminationOption)options;
+- (id)initWithParent:(id <EEEInjectionMappingParent>)parent mappedProtocol:(Protocol *)mappedProtocol options:(EEETerminationOption)options;
 
 @end
 
+@interface EEEInjectionMapping (ClassInjectionMappingStart) <EEEClassInjectionMappingStart>
+@end
+
+@interface EEEInjectionMapping (ProtocolInjectionMappingStart) <EEEProtocolInjectionMappingStart>
+@end
+
+@interface EEEInjectionMapping (InjectionMappingParent) <EEEInjectionMappingParent>
+@end
