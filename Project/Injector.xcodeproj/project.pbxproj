@@ -252,6 +252,7 @@
 				95DD390D19067F0A00C68D0B /* Sources */,
 				95DD390E19067F0A00C68D0B /* Frameworks */,
 				95DD390F19067F0A00C68D0B /* CopyFiles */,
+				956CEB3E190F172300668343 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -290,6 +291,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = epologee;
+				TargetAttributes = {
+					95DD392019067F0B00C68D0B = {
+						TestTargetID = 95DD391019067F0A00C68D0B;
+					};
+				};
 			};
 			buildConfigurationList = 95DD390C19067F0A00C68D0B /* Build configuration list for PBXProject "Injector" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -334,6 +340,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		956CEB3E190F172300668343 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "XcodeCoverage/exportenv.sh\n";
 		};
 		A4698B2B5EE54B3E9BCF3C4F /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -407,6 +426,8 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
