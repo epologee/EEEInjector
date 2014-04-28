@@ -23,11 +23,15 @@
 		95DD396A1906800300C68D0B /* EEEDIInjectableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39581906800300C68D0B /* EEEDIInjectableObject.m */; };
 		95DD396B1906800300C68D0B /* EEEDISimpleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD395A1906800300C68D0B /* EEEDISimpleObject.m */; };
 		95DD396C1906800300C68D0B /* EEEDISimpleSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD395C1906800300C68D0B /* EEEDISimpleSingleton.m */; };
-		95DD396D1906800300C68D0B /* TSTLazyInjectionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD395E1906800300C68D0B /* TSTLazyInjectionSub.m */; };
-		95DD396E1906800300C68D0B /* TSTLazyInjectionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39601906800300C68D0B /* TSTLazyInjectionBase.m */; };
-		95DD396F1906800300C68D0B /* NSObject+EEELazyInjectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39621906800300C68D0B /* NSObject+EEELazyInjectionSpec.m */; };
 		95DD39701906800300C68D0B /* EEEDependencyInjectionTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD39651906800300C68D0B /* EEEDependencyInjectionTestCase.m */; };
 		AAFD08D9DCCB4B60B7C04BE1 /* libPods-InjectorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 898AADA697BB40A6815FFBF7 /* libPods-InjectorTests.a */; };
+		E42076036B4EC6E9AF405403 /* EEEInjector+ProtocolInjectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E42079F34116D607CF8AB768 /* EEEInjector+ProtocolInjectionSpec.m */; };
+		E42078FE3ABDEBD669896FD6 /* TSTConformingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207A2DF9C63FCFA0654A1E /* TSTConformingObject.m */; };
+		E4207AE03441C41D526D7F4B /* NSObject+EEELazyInjectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E420740F621AD50232632E30 /* NSObject+EEELazyInjectionSpec.m */; };
+		E4207AFF8B42DCD4A55088D6 /* TSTLazyInjectionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207B0C8006C2597DFAD5BA /* TSTLazyInjectionBase.m */; };
+		E4207D2368B3940B7624171C /* TSTLazyInjectionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207B4BAEAB4EB9CCF7E163 /* TSTLazyInjectionSub.m */; };
+		E4207E19EF6FB15EA7782B0B /* TSTProtocolInjectionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207E5433D9540EA2BD460A /* TSTProtocolInjectionObject.m */; };
+		E4207E48B0DDA36EB897C7F3 /* TSTConformingObjectSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207C7D074BA2C2D596D13D /* TSTConformingObjectSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,14 +87,20 @@
 		95DD395A1906800300C68D0B /* EEEDISimpleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDISimpleObject.m; sourceTree = "<group>"; };
 		95DD395B1906800300C68D0B /* EEEDISimpleSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDISimpleSingleton.h; sourceTree = "<group>"; };
 		95DD395C1906800300C68D0B /* EEEDISimpleSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDISimpleSingleton.m; sourceTree = "<group>"; };
-		95DD395D1906800300C68D0B /* TSTLazyInjectionSub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTLazyInjectionSub.h; sourceTree = "<group>"; };
-		95DD395E1906800300C68D0B /* TSTLazyInjectionSub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTLazyInjectionSub.m; sourceTree = "<group>"; };
-		95DD395F1906800300C68D0B /* TSTLazyInjectionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTLazyInjectionBase.h; sourceTree = "<group>"; };
-		95DD39601906800300C68D0B /* TSTLazyInjectionBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTLazyInjectionBase.m; sourceTree = "<group>"; };
-		95DD39621906800300C68D0B /* NSObject+EEELazyInjectionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+EEELazyInjectionSpec.m"; sourceTree = "<group>"; };
 		95DD39641906800300C68D0B /* EEEDependencyInjectionTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEDependencyInjectionTestCase.h; sourceTree = "<group>"; };
 		95DD39651906800300C68D0B /* EEEDependencyInjectionTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEDependencyInjectionTestCase.m; sourceTree = "<group>"; };
 		B7FD61DC809E468DBEB93756 /* Pods-InjectorTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InjectorTests.xcconfig"; path = "Pods/Pods-InjectorTests.xcconfig"; sourceTree = "<group>"; };
+		E420708470180344B575F68E /* TSTConformingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTConformingObject.h; sourceTree = "<group>"; };
+		E420740F621AD50232632E30 /* NSObject+EEELazyInjectionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+EEELazyInjectionSpec.m"; sourceTree = "<group>"; };
+		E42076F30C2DE7CC5F44305A /* TSTProtocolInjectionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTProtocolInjectionObject.h; sourceTree = "<group>"; };
+		E420783B2D454E31904B329F /* TSTLazyInjectionSub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTLazyInjectionSub.h; sourceTree = "<group>"; };
+		E42079F34116D607CF8AB768 /* EEEInjector+ProtocolInjectionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EEEInjector+ProtocolInjectionSpec.m"; sourceTree = "<group>"; };
+		E4207A2DF9C63FCFA0654A1E /* TSTConformingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTConformingObject.m; sourceTree = "<group>"; };
+		E4207B0C8006C2597DFAD5BA /* TSTLazyInjectionBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTLazyInjectionBase.m; sourceTree = "<group>"; };
+		E4207B4BAEAB4EB9CCF7E163 /* TSTLazyInjectionSub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTLazyInjectionSub.m; sourceTree = "<group>"; };
+		E4207C7D074BA2C2D596D13D /* TSTConformingObjectSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTConformingObjectSpec.m; sourceTree = "<group>"; };
+		E4207DC2A2A3402DC43F5455 /* TSTLazyInjectionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTLazyInjectionBase.h; sourceTree = "<group>"; };
+		E4207E5433D9540EA2BD460A /* TSTProtocolInjectionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTProtocolInjectionObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,10 +251,6 @@
 				95DD395A1906800300C68D0B /* EEEDISimpleObject.m */,
 				95DD395B1906800300C68D0B /* EEEDISimpleSingleton.h */,
 				95DD395C1906800300C68D0B /* EEEDISimpleSingleton.m */,
-				95DD395D1906800300C68D0B /* TSTLazyInjectionSub.h */,
-				95DD395E1906800300C68D0B /* TSTLazyInjectionSub.m */,
-				95DD395F1906800300C68D0B /* TSTLazyInjectionBase.h */,
-				95DD39601906800300C68D0B /* TSTLazyInjectionBase.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -252,7 +258,8 @@
 		95DD39611906800300C68D0B /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				95DD39621906800300C68D0B /* NSObject+EEELazyInjectionSpec.m */,
+				E42076D2C6D9FB853194053E /* Lazy injection */,
+				E4207285518F2B7C4E953373 /* Protocol mapping */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -264,6 +271,31 @@
 				95DD39651906800300C68D0B /* EEEDependencyInjectionTestCase.m */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		E4207285518F2B7C4E953373 /* Protocol mapping */ = {
+			isa = PBXGroup;
+			children = (
+				E4207A2DF9C63FCFA0654A1E /* TSTConformingObject.m */,
+				E420708470180344B575F68E /* TSTConformingObject.h */,
+				E4207C7D074BA2C2D596D13D /* TSTConformingObjectSpec.m */,
+				E4207E5433D9540EA2BD460A /* TSTProtocolInjectionObject.m */,
+				E42076F30C2DE7CC5F44305A /* TSTProtocolInjectionObject.h */,
+				E42079F34116D607CF8AB768 /* EEEInjector+ProtocolInjectionSpec.m */,
+			);
+			path = "Protocol mapping";
+			sourceTree = "<group>";
+		};
+		E42076D2C6D9FB853194053E /* Lazy injection */ = {
+			isa = PBXGroup;
+			children = (
+				E420783B2D454E31904B329F /* TSTLazyInjectionSub.h */,
+				E4207B4BAEAB4EB9CCF7E163 /* TSTLazyInjectionSub.m */,
+				E4207DC2A2A3402DC43F5455 /* TSTLazyInjectionBase.h */,
+				E4207B0C8006C2597DFAD5BA /* TSTLazyInjectionBase.m */,
+				E420740F621AD50232632E30 /* NSObject+EEELazyInjectionSpec.m */,
+			);
+			path = "Lazy injection";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,13 +428,17 @@
 				95DD39661906800300C68D0B /* EEEDIBaseObject.m in Sources */,
 				95DD396C1906800300C68D0B /* EEEDISimpleSingleton.m in Sources */,
 				95DD396A1906800300C68D0B /* EEEDIInjectableObject.m in Sources */,
-				95DD396F1906800300C68D0B /* NSObject+EEELazyInjectionSpec.m in Sources */,
 				95DD39681906800300C68D0B /* EEEDIConcreteObject.m in Sources */,
 				95DD39691906800300C68D0B /* EEEDIConcreteSingleton.m in Sources */,
 				95DD39701906800300C68D0B /* EEEDependencyInjectionTestCase.m in Sources */,
-				95DD396E1906800300C68D0B /* TSTLazyInjectionBase.m in Sources */,
-				95DD396D1906800300C68D0B /* TSTLazyInjectionSub.m in Sources */,
 				95DD396B1906800300C68D0B /* EEEDISimpleObject.m in Sources */,
+				E4207D2368B3940B7624171C /* TSTLazyInjectionSub.m in Sources */,
+				E4207AFF8B42DCD4A55088D6 /* TSTLazyInjectionBase.m in Sources */,
+				E4207AE03441C41D526D7F4B /* NSObject+EEELazyInjectionSpec.m in Sources */,
+				E42078FE3ABDEBD669896FD6 /* TSTConformingObject.m in Sources */,
+				E4207E48B0DDA36EB897C7F3 /* TSTConformingObjectSpec.m in Sources */,
+				E4207E19EF6FB15EA7782B0B /* TSTProtocolInjectionObject.m in Sources */,
+				E42076036B4EC6E9AF405403 /* EEEInjector+ProtocolInjectionSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
