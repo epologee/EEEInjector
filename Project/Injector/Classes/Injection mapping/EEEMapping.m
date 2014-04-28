@@ -120,6 +120,8 @@
 
 - (id <EEEBlockChainMappingEnd> (^)(id))toObject
 {
+    NSParameterAssert(![_parent isKindOfClass:[self class]]);
+    NSParameterAssert(_targetBlock == nil);
     return ^id <EEEBlockChainMappingEnd>(id object) {
         self.targetObject = object;
         return self;
@@ -131,10 +133,12 @@
     return ^id <EEEBlockChainMappingObject>(Class conformingClass) {
         if (![conformingClass conformsToProtocol:self.mappedProtocol])
         {
-            [[NSException exceptionWithName:@"EEEMapping" reason:@"Class does not conform to mapped protocol" userInfo:@{
-                    @"Class" : NSStringFromClass(conformingClass),
-                    @"Protocol" : NSStringFromProtocol(self.mappedProtocol)
-            }] raise];
+            [[NSException exceptionWithName:@"EEEMapping"
+                                     reason:@"Class does not conform to mapped protocol"
+                                   userInfo:@{
+                                           @"Class" : NSStringFromClass(conformingClass),
+                                           @"Protocol" : NSStringFromProtocol(self.mappedProtocol)
+                                   }] raise];
         }
 
         return self.toSubclass(conformingClass);
@@ -143,6 +147,8 @@
 
 - (id <EEEBlockChainMappingObject> (^)(Class))toSubclass
 {
+    NSParameterAssert(_targetObject == nil);
+    NSParameterAssert(_targetBlock == nil);
     return ^id <EEEBlockChainMappingObject>(Class subclass) {
         EEEMapping *childMapping = [[EEEMapping alloc] init];
         childMapping.mappedClass = subclass;
@@ -154,6 +160,8 @@
 
 - (id <EEEBlockChainMappingObject> (^)(EEEInjectionBlock))toBlock
 {
+    NSParameterAssert(_targetObject == nil);
+    NSParameterAssert(![_parent isKindOfClass:[self class]]);
     return ^id <EEEBlockChainMappingObject>(EEEInjectionBlock block) {
         self.targetBlock = block;
         return self;
@@ -165,6 +173,13 @@
     return ^id <EEEBlockChainMappingVoid>(BOOL enable) {
         if (enable)
         {
+            if (self.options & EEEBlockChainOptionKeepReference)
+            {
+                [[NSException exceptionWithName:@"EEEMapping"
+                                         reason:@"Internal inconsistency, attempt to combine `removeAfterUse` with `keepReference`"
+                                       userInfo:nil] raise];
+            }
+
             self.options |= EEEBlockChainOptionRemoveAfterUse;
         }
         else
@@ -181,6 +196,13 @@
     return ^id <EEEBlockChainMappingVoid>(BOOL enable) {
         if (enable)
         {
+            if (self.options & EEEBlockChainOptionRemoveAfterUse)
+            {
+                [[NSException exceptionWithName:@"EEEMapping"
+                                         reason:@"Internal inconsistency, attempt to combine `keepReference` with `removeAfterUse`"
+                                       userInfo:nil] raise];
+            }
+
             self.options |= EEEBlockChainOptionKeepReference;
         }
         else

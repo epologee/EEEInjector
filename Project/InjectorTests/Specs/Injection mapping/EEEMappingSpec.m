@@ -39,7 +39,7 @@ SPEC_BEGIN(EEEMappingSpec)
                     });
                 });
 
-                context(@"to subclass", ^{
+                describe(@"to subclass", ^{
                     beforeEach(^{
                         mapping = [EEEMapping mapClass:[NSArray class]];
                     });
@@ -96,6 +96,60 @@ SPEC_BEGIN(EEEMappingSpec)
                         [string appendString:@" World!"];
 
                         [[[(EEEMapping *) mapping targetObject] should] equal:@"Hello World!"];
+                    });
+                });
+
+                describe(@"throw exceptions when incorrectly combining mapping chains", ^{
+                    beforeEach(^{
+                        mapping = [EEEMapping mapClass:[NSNumber class]];
+                    });
+
+                    specify(^{
+                        [[theBlock(^{
+                            ((id <EEEClassBlockChainMappingStart>) mapping.toSubclass([NSMutableArray class])).toBlock(^id {return @2;});
+                        }) should] raise];
+                    });
+
+                    specify(^{
+                        [[theBlock(^{
+                            ((id <EEEClassBlockChainMappingStart>) mapping.toSubclass([NSMutableArray class])).toObject(@2);
+                        }) should] raise];
+                    });
+
+                    specify(^{
+                        [[theBlock(^{
+                            ((id <EEEClassBlockChainMappingStart>) mapping.toObject(@2)).toSubclass([NSMutableArray class]);
+                        }) should] raise];
+                    });
+
+                    specify(^{
+                        [[theBlock(^{
+                            ((id <EEEClassBlockChainMappingStart>) mapping.toObject(@2)).toBlock(^id {return @2;});
+                        }) should] raise];
+                    });
+
+                    specify(^{
+                        [[theBlock(^{
+                            ((id <EEEClassBlockChainMappingStart>) mapping.toBlock(^id {return @2;})).toObject(@2);
+                        }) should] raise];
+                    });
+
+                    specify(^{
+                        [[theBlock(^{
+                            ((id <EEEClassBlockChainMappingStart>) mapping.toBlock(^id {return @2;})).toSubclass([NSMutableArray class]);
+                        }) should] raise];
+                    });
+
+                    specify(^{
+                        [[theBlock(^{
+                            ((id <EEEBlockChainMappingObject>) mapping.toSubclass([NSMutableArray class]).keepReference(YES)).removeAfterUse(YES);
+                        }) should] raise];
+                    });
+
+                    specify(^{
+                        [[theBlock(^{
+                            ((id <EEEBlockChainMappingObject>) mapping.toSubclass([NSMutableArray class]).removeAfterUse(YES)).keepReference(YES);
+                        }) should] raise];
                     });
                 });
             });
