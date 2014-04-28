@@ -1,5 +1,7 @@
 platform :ios, '7.0'
 
+xcodeproj "Project/Injector"
+
 target "Injector", :exclusive => true do
   # pod "EEEInjector"
   # pod "EEEOperationCenter", :path => "../"

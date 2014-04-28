@@ -1,0 +1,1 @@
+xctool -workspace Project/Injector.xcworkspace -scheme InjectorTests test -sdk iphonesimulator
