@@ -2,6 +2,9 @@
 #import "EEEInjector.h"
 #import "TSTLazyInjectionBase.h"
 #import "TSTLazyInjectionSub.h"
+#import "TSTMappable.h"
+#import "TSTMappableConformingObject.h"
+#import "TSTNonConformingObject.h"
 
 SPEC_BEGIN(NSObject_EEELazyInjectionSpec)
 
@@ -12,7 +15,7 @@ SPEC_BEGIN(NSObject_EEELazyInjectionSpec)
                 injector = [EEEInjector setCurrentInjector:[[EEEInjector alloc] init] force:YES];
             });
 
-            context(@"with a setup", ^{
+            context(@"class based properties", ^{
                 __block NSDate *date = nil;
 
                 beforeEach(^{
@@ -37,6 +40,18 @@ SPEC_BEGIN(NSObject_EEELazyInjectionSpec)
                     NSDate *ancient = [NSDate dateWithTimeIntervalSince1970:0];
                     sut.datePropertyInSubClass = ancient;
                     [[sut.datePropertyInSubClass should] equal:ancient];
+                });
+            });
+
+            context(@"protocol based properties", ^{
+                beforeEach(^{
+                    injector.mapProtocol(@protocol(TSTMappable)).toConformingClass([TSTMappableConformingObject class]);
+                });
+
+                it(@"injects properties from the subclass", ^{
+                    TSTNonConformingObject *sut = [[TSTNonConformingObject alloc] init];
+                    id object = sut.mappableConformingObject;
+                    [[object should] beKindOfClass:[TSTMappableConformingObject class]];
                 });
             });
         });

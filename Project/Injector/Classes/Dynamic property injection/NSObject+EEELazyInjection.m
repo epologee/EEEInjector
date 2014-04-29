@@ -163,15 +163,32 @@ id EEEGetLazilyInjectedPropertyValue(id object, SEL _cmd) {
     NSString *propertyName = EEEPropertyNameFromGetter(_cmd);
     SEL associationKey = NSSelectorFromString(propertyName);
 
-    id result = objc_getAssociatedObject(object, sel_getName(associationKey));
+    __block id result = objc_getAssociatedObject(object, sel_getName(associationKey));
 
     if (!result)
     {
+        EEEInjector *injector = [EEEInjector currentInjector];
         Class objectClass = [object class];
         objc_property_t property = class_getProperty(objectClass, [propertyName UTF8String]);
 
-        id propertyClass = EEEClassForProperty(property, NULL);
-        result = [propertyClass eee_objectFromInjector:[EEEInjector currentInjector] withIdentifier:propertyName];
+        NSArray *protocols = nil;
+        id propertyClass = EEEClassForProperty(property, &protocols);
+        BOOL isId = propertyClass == [NSObject class];
+        if (isId && [protocols count] > 0)
+        {
+            [protocols enumerateObjectsUsingBlock:^(Protocol *protocol, NSUInteger idx, BOOL *stop) {
+                result = [injector objectForMappedProtocol:protocol withIdentifier:propertyName];
+                if (result)
+                {
+                    *stop = YES;
+                }
+            }];
+        }
+
+        if (!result)
+        {
+            result = [injector objectForMappedClass:propertyClass withIdentifier:propertyName];
+        }
 
         if (result)
         {

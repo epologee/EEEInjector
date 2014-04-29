@@ -5,6 +5,7 @@
 {
     int _counter;
 }
+
 @dynamic stringPropertyInBaseClass;
 
 + (void)initialize

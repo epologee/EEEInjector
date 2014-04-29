@@ -18,6 +18,12 @@
 
 + (instancetype)currentInjector;
 
+- (id)objectForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier;
+
+- (id)objectForMappedProtocol:(Protocol *)mappedProtocol withIdentifier:(NSString *)identifier;
+
+- (Class)classForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier;
+
 @end
 
 @interface NSObject (EEEInjector)

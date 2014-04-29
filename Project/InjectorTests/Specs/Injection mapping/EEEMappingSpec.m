@@ -15,8 +15,6 @@
 SPEC_BEGIN(EEEMappingSpec)
 
         describe(@"EEEMapping", ^{
-            let(number5, ^{return @5;});
-
             context(@"class block chain mapping", ^{
                 __block id <EEEClassBlockChainMappingStart> mapping;
 
@@ -26,14 +24,14 @@ SPEC_BEGIN(EEEMappingSpec)
                     });
 
                     it(@"returns a target object", ^{
-                        mapping.toObject(number5);
-                        [[[(EEEMapping *) mapping targetObject] should] equal:number5];
+                        mapping.toObject(@5);
+                        [[[(EEEMapping *) mapping targetObject] should] equal:@5];
                     });
 
                     it(@"can be single serving", ^{
-                        mapping.toObject(number5).removeAfterUse(YES);
+                        mapping.toObject(@5).removeAfterUse(YES);
 
-                        [[[(EEEMapping *) mapping targetObject] should] equal:number5];
+                        [[[(EEEMapping *) mapping targetObject] should] equal:@5];
                         [[[(EEEMapping *) mapping targetObject] should] beNil];
                     });
                 });
@@ -162,8 +160,8 @@ SPEC_BEGIN(EEEMappingSpec)
                     });
 
                     it(@"returns a target object, regardless of conformity", ^{
-                        mapping.toObject(number5);
-                        [[[(EEEMapping *) mapping targetObject] should] equal:number5];
+                        mapping.toObject(@5);
+                        [[[(EEEMapping *) mapping targetObject] should] equal:@5];
                     });
                 });
 
