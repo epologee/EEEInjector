@@ -1,20 +1,24 @@
 #import "EEEInjector.h"
 #import "EEEIntrospectProperty.h"
+#import "EEEMapping.h"
 
-static EEEInjector *_currentInjector;
+@interface EEEInjector () <EEEMappingParent>
 
-@interface EEEInjector () <EEEInjectionMappingParent, EEEInjectorInternals>
+@property(nonatomic, strong) NSMutableDictionary *mappingsByKey;
 
-@property(nonatomic, strong) NSMutableDictionary *mappings;
+@end
+
+@interface NSString (EEEInjector)
+
++ (NSString *)keyForClass:(Class)class withIdentifier:(NSString *)identifier;
+
++ (NSString *)keyForProtocol:(Protocol *)proto withIdentifier:(NSString *)identifier;
 
 @end
 
 @implementation EEEInjector
 
-+ (instancetype)currentInjector
-{
-    return _currentInjector;
-}
+static EEEInjector *_currentInjector;
 
 + (instancetype)defaultCurrentInjector
 {
@@ -32,41 +36,13 @@ static EEEInjector *_currentInjector;
 
         _currentInjector = injector;
     }
+
     return _currentInjector;
 }
 
-+ (EEEInjector *)sharedInjector
++ (instancetype)currentInjector
 {
-    return [self currentInjector];
-}
-
-+ (EEEInjector *)setSharedInjector
-{
-    return [self setSharedInjector:[[self alloc] init]];
-}
-
-+ (EEEInjector *)setSharedInjector:(EEEInjector *)injector
-{
-    @synchronized (self)
-    {
-        if (injector)
-        {
-            NSAssert(_currentInjector == nil, @"Won't setup the shared injector if there already is one.");
-        }
-
-        _currentInjector = injector;
-    }
     return _currentInjector;
-}
-
-+ (NSString *)keyForClass:(Class)class withIdentifier:(NSString *)identifier
-{
-    return [NSString stringWithFormat:@"%@xC@%@", NSStringFromClass(class), identifier ? identifier : @""];
-}
-
-+ (NSString *)keyForProtocol:(Protocol *)proto withIdentifier:(NSString *)identifier
-{
-    return [NSString stringWithFormat:@"%@xP@%@", NSStringFromProtocol(proto), identifier ? identifier : @""];
 }
 
 - (id)init
@@ -75,241 +51,122 @@ static EEEInjector *_currentInjector;
 
     if (self)
     {
-        self.mappings = [NSMutableDictionary dictionary];
+        _mappingsByKey = [NSMutableDictionary dictionary];
 
-        [[self mapClass:[self class]] toObject:self];
+        NSString *key = [NSString keyForClass:[EEEInjector class] withIdentifier:nil];
+        self[key] = [EEEMapping mapClass:[EEEInjector class] parent:nil ].toObject(self);
     }
 
     return self;
 }
 
-- (id <EEEInjectionMapper>)asMapper
+- (id <EEEClassBlockChainMappingStart> (^)(Class))mapClass
 {
-    return self;
+    return ^id <EEEClassBlockChainMappingStart>(Class mappedClass) {
+        return self.mapClassWithIdentifier(mappedClass, nil);
+    };
 }
 
-#pragma mark - Mapping protocols and classes
-
-- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class
+- (id <EEEClassBlockChainMappingStart> (^)(Class, NSString *))mapClassWithIdentifier
 {
-    return [self mapClass:class withIdentifier:nil];
+    return ^id <EEEClassBlockChainMappingStart>(Class mappedClass, NSString *identifier) {
+        NSString *key = [NSString keyForClass:mappedClass withIdentifier:identifier];
+        id <EEEClassBlockChainMappingStart> mapping = [EEEMapping mapClass:mappedClass parent:self];
+        self[key] = mapping;
+        return mapping;
+    };
 }
 
-- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier
+- (id <EEEProtocolBlockChainMappingStart> (^)(Protocol *))mapProtocol
 {
-    return [self mapClass:class withIdentifier:identifier overwriteExisting:YES];
+    return ^id <EEEProtocolBlockChainMappingStart>(Protocol *mappedProtocol) {
+        return self.mapProtocolWithIdentifier(mappedProtocol, nil);
+    };
 }
 
-- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting
+- (id <EEEProtocolBlockChainMappingStart> (^)(Protocol *, NSString *))mapProtocolWithIdentifier
 {
-    return [self mapClass:class withIdentifier:nil overwriteExisting:overwriteExisting];
+    return ^id <EEEProtocolBlockChainMappingStart>(Protocol *mappedProtocol, NSString *identifier) {
+        NSString *key = [NSString keyForProtocol:mappedProtocol withIdentifier:identifier];
+        id <EEEProtocolBlockChainMappingStart> mapping = [EEEMapping mapProtocol:mappedProtocol parent:self];
+        self[key] = mapping;
+        return mapping;
+    };
 }
 
-- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting
+- (void)removeChildMapping:(EEEMapping *)mapping
 {
-    NSString *key = [[self class] keyForClass:class withIdentifier:identifier];
-
-    if (!overwriteExisting)
-    {
-        NSAssert([self.mappings objectForKey:key] == nil, @"Attempted duplicate mapping for key %@", key);
-    }
-
-    EEEInjectionMapping *mapping = [[EEEInjectionMapping alloc] initWithParent:self mappedClass:class options:EEETerminationOptionNone];
-    self.mappings[key] = mapping;
-
-    return mapping;
-}
-
-- (void)unmapClass:(Class)class
-{
-    [self unmapClass:class withIdentifier:nil];
-}
-
-- (void)unmapClass:(Class)class withIdentifier:(NSString *)identifier
-{
-    NSString *key = [[self class] keyForClass:class withIdentifier:identifier];
-    NSAssert([self.mappings objectForKey:key] != nil, @"Can't unmap a class if there's no such mapping (%@)", key);
-
-    [self.mappings removeObjectForKey:key];
-}
-
-- (id <EEEProtocolInjectionMappingStart>)mapProtocol:(Protocol *)protocol
-{
-    return [self mapProtocol:protocol withIdentifier:nil overwriteExisting:YES];
-}
-
-- (id <EEEProtocolInjectionMappingStart>)mapProtocol:(Protocol *)protocol withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting
-{
-    NSString *key = [[self class] keyForProtocol:protocol withIdentifier:identifier];
-
-    if (!overwriteExisting)
-    {
-        NSAssert([self.mappings objectForKey:key] == nil, @"Attempted duplicate mapping for key %@", key);
-    }
-
-    EEEInjectionMapping *mapping = [[EEEInjectionMapping alloc] initWithParent:self mappedProtocol:protocol options:EEETerminationOptionNone];
-    self.mappings[key] = mapping;
-
-    return mapping;
-}
-
-- (void)removeChildMapping:(EEEInjectionMapping *)mapping
-{
-    [self.mappings enumerateKeysAndObjectsUsingBlock:^(NSString *key, EEEInjectionMapping *existingMapping, BOOL *stop) {
+    [self.mappingsByKey enumerateKeysAndObjectsUsingBlock:^(NSString *key, EEEMapping *existingMapping, BOOL *stop) {
         if (existingMapping == mapping)
         {
-            [self.mappings removeObjectForKey:key];
+            [self.mappingsByKey removeObjectForKey:key];
             *stop = YES;
         }
     }];
 }
 
-- (EEEInjector *)asInjector
-{
-    return self;
-}
-
-
 #pragma mark - Retrieving objects from mapped protocols and classes
-
-
 
 - (id)objectForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier
 {
-    EEEInjectionMapping *mapping = [self mappingForMappedClass:mappedClass withIdentifier:identifier];
-    return [self injectPropertiesIntoObject:[mapping targetObject] withMapping:mapping];
+    EEEMapping *mapping = [self findOrCreateMappingForClass:mappedClass withIdentifier:identifier];
+    return [mapping targetObject];
 }
 
 - (id)objectForMappedProtocol:(Protocol *)mappedProtocol withIdentifier:(NSString *)identifier
 {
-    EEEInjectionMapping *mapping = [self mappingForMappedProtocol:mappedProtocol withIdentifier:identifier];
-    return [self injectPropertiesIntoObject:[mapping targetObject] withMapping:mapping];
-}
-
-- (EEEInjectionMapping *)mappingForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier
-{
-    NSString *key = [[self class] keyForClass:mappedClass withIdentifier:identifier];
-    EEEInjectionMapping *mapping = self.mappings[key];
-
-    if (!mapping)
-    {
-        key = [[self class] keyForClass:mappedClass withIdentifier:nil];
-        mapping = self.mappings[key];
-    }
-
-    if (!mapping && self.allowImplicitMapping)
-    {
-        mapping = [[EEEInjectionMapping alloc] initWithParent:self mappedClass:mappedClass options:EEETerminationOptionNone];
-    }
-
-    return mapping;
-}
-
-- (EEEInjectionMapping *)mappingForMappedProtocol:(Protocol *)mappedProtocol withIdentifier:(NSString *)identifier
-{
-    NSString *key = [[self class] keyForProtocol:mappedProtocol withIdentifier:identifier];
-    EEEInjectionMapping *mapping = self.mappings[key];
-
-    if (!mapping)
-    {
-        key = [[self class] keyForProtocol:mappedProtocol withIdentifier:nil];
-        mapping = self.mappings[key];
-    }
-
-    if (!mapping && !self.allowImplicitMapping)
-    {
-        // TODO: Raise error for unmapped protocol?
-    }
-
-    return mapping;
+    EEEMapping *mapping = [self findOrCreateMappingForProtocol:mappedProtocol withIdentifier:identifier];
+    return [mapping targetObject];
 }
 
 - (Class)classForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier
 {
-    EEEInjectionMapping *mapping = [self mappingForMappedClass:mappedClass withIdentifier:identifier];
+    EEEMapping *mapping = [self findOrCreateMappingForClass:mappedClass withIdentifier:identifier];
     return [mapping targetClass];
 }
 
-
-#pragma mark - Property injection
-
-- (id)injectPropertiesIntoObject:(id)object
+- (EEEMapping *)findOrCreateMappingForClass:(Class)mappedClass withIdentifier:(NSString *)identifier
 {
-    return [self injectPropertiesIntoObject:object withMapping:nil];
-}
+    NSString *key = [NSString keyForClass:mappedClass withIdentifier:identifier];
+    EEEMapping *mapping = self[key];
 
-- (id)injectPropertiesIntoObject:(id)object withMapping:(EEEInjectionMapping *)mapping
-{
-    if (!mapping && self.allowImplicitMapping)
+    if (!mapping)
     {
-        // Multiple injection calls on the same object-kind could cause multiple mappings
-        // to be created implicitly, overwriting each other as values in the classMappings
-        // dictionary. This @synchronized block prevents this to cause race conditions and
-        // over-released mapping objects.
-        @synchronized (self)
+        key = [NSString keyForClass:mappedClass withIdentifier:nil];
+        mapping = self[key];
+
+        if (!mapping)
         {
-            if (!mapping && self.allowImplicitMapping)
-            {
-                NSString *key = [[self class] keyForClass:[object class] withIdentifier:nil];
-                mapping = [[EEEInjectionMapping alloc] initWithParent:self mappedClass:[object class] options:EEETerminationOptionNone];
-                self.mappings[key] = mapping;
-            }
-        }
-    }
-    BOOL previouslyInjected = [self performInjectionOnObject:object withMapping:mapping];
-
-    if (!previouslyInjected && [object respondsToSelector:@selector(didInjectProperties)])
-    {
-        [object didInjectProperties];
-    }
-
-    return object;
-}
-
-- (BOOL)performInjectionOnObject:(NSObject <EEEInjectable> *)object withMapping:(EEEInjectionMapping *)mapping
-{
-    __block int count = 0;
-    __block BOOL nonNilPropertiesFound = NO;
-    if (mapping)
-    {
-        [mapping.injectables enumerateKeysAndObjectsUsingBlock:^(NSString *identifier, id typeClass, BOOL *stop) {
-            if ([object valueForKey:identifier] == nil)
-            {
-                count++;
-                id value = [self objectForMappedClass:typeClass withIdentifier:identifier];
-                [object setValue:value forKey:identifier];
-            }
-            else
-            {
-                nonNilPropertiesFound = YES;
-            }
-        }];
-    }
-    else
-    {
-        NSArray *properties = [EEEIntrospectProperty propertiesOfClass:[object class]];
-
-        for (EEEIntrospectProperty *prop in properties)
-        {
-            if (prop.isObject && [prop implementsProtocol:@protocol(EEEInjectable)])
-            {
-                if ([object valueForKey:prop.name] == nil)
-                {
-                    count++;
-                    id value = [self objectForMappedClass:prop.typeClass withIdentifier:prop.name];
-                    if (!value) value = [self objectForMappedClass:prop.typeClass withIdentifier:nil];
-                    NSAssert(value != nil, @"No mapping found for property %@ marked with <EEEInjectable>", prop.name);
-                    [object setValue:value forKey:prop.name];
-                }
-                else
-                {
-                    nonNilPropertiesFound = YES;
-                }
-            }
+            mapping = (id) [EEEMapping mapClass:mappedClass parent:self];
+            self[key] = mapping;
         }
     }
 
-    return nonNilPropertiesFound;
+    return mapping;
+}
+
+- (EEEMapping *)findOrCreateMappingForProtocol:(Protocol *)mappedProtocol withIdentifier:(NSString *)identifier
+{
+    NSString *key = [NSString keyForProtocol:mappedProtocol withIdentifier:identifier];
+    EEEMapping *mapping = self[key];
+
+    if (!mapping)
+    {
+        key = [NSString keyForProtocol:mappedProtocol withIdentifier:nil];
+        mapping = self[key];
+    }
+
+    return mapping;
+}
+
+- (id)objectForKeyedSubscript:(id <NSCopying>)key
+{
+    return self.mappingsByKey[key];
+}
+
+- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key
+{
+    self.mappingsByKey[key] = obj;
 }
 
 @end
@@ -343,11 +200,18 @@ static EEEInjector *_currentInjector;
     return value;
 }
 
-- (instancetype)eee_injectWithInjector:(EEEInjector *)injector
+@end
+
+@implementation NSString (EEEInjector)
+
++ (NSString *)keyForClass:(Class)class withIdentifier:(NSString *)identifier
 {
-    NSAssert(injector, @"Can't inject from nil injector.");
-    [injector injectPropertiesIntoObject:(id <EEEInjectable>) self withMapping:nil ];
-    return self;
+    return [NSString stringWithFormat:@"%@xC@%@", NSStringFromClass(class), identifier ? identifier : @""];
+}
+
++ (NSString *)keyForProtocol:(Protocol *)proto withIdentifier:(NSString *)identifier
+{
+    return [NSString stringWithFormat:@"%@xP@%@", NSStringFromProtocol(proto), identifier ? identifier : @""];
 }
 
 @end

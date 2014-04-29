@@ -1,120 +1,37 @@
 #import <Foundation/Foundation.h>
-#import "EEEInjectionMapping.h"
+#import "EEEBlockChainMapping.h"
 
 #define injectClass eee_classWithInjector:[EEEInjector currentInjector]
-#define injectAlloc eee_allocWithInjector:[EEEInjector currentInjector]
 #define injectObject eee_objectFromInjector:[EEEInjector currentInjector]
 #define injectObjectNamed(name) eee_objectFromInjector:[EEEInjector currentInjector] withIdentifier:name
-#define inject eee_injectWithInjector:[EEEInjector currentInjector]
 
-/**
- The EEEInjectable protocol is used to 'mark' properties to be injected automatically.
- The injected objects need not implement the protocol explicitly.
- You can, for example, inject an array property like this:
- @property (strong) NSArray <EEEInjectable>*plants;
- */
-@protocol EEEInjectable <NSObject>
+@interface EEEInjector : NSObject <EEEMappingParent>
 
-@optional
-- (void)didInjectProperties;
-
-@end
-
-@class EEEInjector;
-
-/**
- This mapper protocol is used to narrow down the methods you call on the injector directly.
- The rest of its methods are accessed through the NSObject category class methods below.
- Example:
- 
- [[[self.injector mapClass:[CustomClass class]] toObject:[CustomSubclass]] singleServing];
- [[self.injector mapClass:[NSArray class] withIdentifier:@"plants"] toObject:@[@"Tree", @"Grass"]];
- */
-@protocol EEEInjectionMapper
-
-- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class;
-
-- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier;
-
-- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting;
-
-- (id <EEEClassInjectionMappingStart>)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(BOOL)overwriteExisting;
-
-- (void)unmapClass:(Class)class;
-
-- (void)unmapClass:(Class)class withIdentifier:(NSString *)identifier;
-
-- (EEEInjector *)asInjector;
-
-@end
-
-@protocol EEEInjectorInternals
-
-- (id)objectForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier;
-
-- (EEEInjectionMapping *)mappingForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier;
-
-- (id)objectForMappedProtocol:(Protocol *)mappedProtocol withIdentifier:(NSString *)identifier;
-
-- (EEEInjectionMapping *)mappingForMappedProtocol:(Protocol *)mappedClass withIdentifier:(NSString *)identifier;
-
-@end
-
-/**
- The EEEInjector public interface only deals with class methods for setting and getting a/the shared injector.
- You can manually keep a reference to one or more injector instances if you prefer.
- */
-@interface EEEInjector : NSObject <EEEInjectionMapper>
-
-@property(nonatomic) BOOL allowImplicitMapping;
-
-+ (instancetype)currentInjector;
+@property(nonatomic, readonly) id <EEEClassBlockChainMappingStart> (^mapClass)(Class mappedClass);
+@property(nonatomic, readonly) id <EEEClassBlockChainMappingStart> (^mapClassWithIdentifier)(Class mappedClass, NSString *identifier);
+@property(nonatomic, readonly) id <EEEProtocolBlockChainMappingStart> (^mapProtocol)(Protocol *mappedProtocol);
+@property(nonatomic, readonly) id <EEEProtocolBlockChainMappingStart> (^mapProtocolWithIdentifier)(Protocol *mappedProtocol, NSString *identifier);
 
 + (instancetype)defaultCurrentInjector;
 
 + (instancetype)setCurrentInjector:(EEEInjector *)injector force:(BOOL)force;
 
-+ (EEEInjector *)sharedInjector DEPRECATED_ATTRIBUTE; // Replaced by currentInjector
++ (instancetype)currentInjector;
 
-+ (EEEInjector *)setSharedInjector DEPRECATED_ATTRIBUTE; // Replaced by defaultCurrentInjector
+- (id)objectForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier;
 
-+ (EEEInjector *)setSharedInjector:(EEEInjector *)injector DEPRECATED_ATTRIBUTE; // Replaced by setCurrentInjector:force:
+- (id)objectForMappedProtocol:(Protocol *)mappedProtocol withIdentifier:(NSString *)identifier;
 
-- (id <EEEInjectionMapper>)asMapper;
+- (Class)classForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier;
 
-- (id)injectPropertiesIntoObject:(id)object;
-
-- (id <EEEProtocolInjectionMappingStart>)mapProtocol:(Protocol *)protocol;
 @end
 
-/**
- Retrieve mapped classes, objects or manually fire injection with these NSObject methods.
- Example:
- 
-    [[CustomClass eee_allocWithInjector:[EEEInjector sharedInjector]] initWithFrame:CGRectZero];
- 
- There's a shorthand macro for this above, so you if you use the sharedInjector, you may write:
- 
-    [[CustomClass injectAlloc] initWithFrame:CGRectZero];
- 
- Or try identifier-based mappings:
- 
-    [NSArray eee_objectFromInjector:[EEEInjector sharedInjector] withIdentifier:@"plants"];
- 
- If objects are mapped with an identifier, properties that share that name will be automatically injected:
- 
-    @property (strong) NSArray <EEEInjectable>*plants;
- */
 @interface NSObject (EEEInjector)
 
 + (Class)eee_classWithInjector:(EEEInjector *)injector;
 
-+ (instancetype)eee_allocWithInjector:(EEEInjector *)injector;
-
 + (instancetype)eee_objectFromInjector:(EEEInjector *)injector;
 
 + (instancetype)eee_objectFromInjector:(EEEInjector *)injector withIdentifier:(NSString *)identifier;
-
-- (instancetype)eee_injectWithInjector:(EEEInjector *)injector;
 
 @end
