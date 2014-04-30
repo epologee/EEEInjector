@@ -17,6 +17,7 @@
 		95DD392619067F0B00C68D0B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD392519067F0B00C68D0B /* UIKit.framework */; };
 		95DD392919067F0B00C68D0B /* libInjector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD391119067F0A00C68D0B /* libInjector.a */; };
 		AAFD08D9DCCB4B60B7C04BE1 /* libPods-InjectorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 898AADA697BB40A6815FFBF7 /* libPods-InjectorTests.a */; };
+		E420700C2D3925131598FBBB /* EEEBackwardCompatibleMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207130578238DF84C49E45 /* EEEBackwardCompatibleMapping.m */; };
 		E4207216CFB2D13F9D7C6AC3 /* TSTNonConformingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207255819B42C7DD482058 /* TSTNonConformingObject.m */; };
 		E42074213FDDC8B4543E11DF /* EEEMappingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E420720D096615F63DF7D5AA /* EEEMappingSpec.m */; };
 		E4207AE03441C41D526D7F4B /* NSObject+EEELazyInjectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E420740F621AD50232632E30 /* NSObject+EEELazyInjectionSpec.m */; };
@@ -66,6 +67,7 @@
 		95DD392519067F0B00C68D0B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		95DD392C19067F0B00C68D0B /* InjectorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InjectorTests-Info.plist"; sourceTree = "<group>"; };
 		B7FD61DC809E468DBEB93756 /* Pods-InjectorTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InjectorTests.xcconfig"; path = "Pods/Pods-InjectorTests.xcconfig"; sourceTree = "<group>"; };
+		E4207130578238DF84C49E45 /* EEEBackwardCompatibleMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEBackwardCompatibleMapping.m; sourceTree = "<group>"; };
 		E420720D096615F63DF7D5AA /* EEEMappingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEMappingSpec.m; sourceTree = "<group>"; };
 		E4207255819B42C7DD482058 /* TSTNonConformingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTNonConformingObject.m; sourceTree = "<group>"; };
 		E42073107B240D2A840E3659 /* TSTMappableConformingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTMappableConformingObject.m; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 		E4207B4BAEAB4EB9CCF7E163 /* TSTLazyInjectionSub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTLazyInjectionSub.m; sourceTree = "<group>"; };
 		E4207C2778031A93C8973376 /* TSTMappableConformingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTMappableConformingObject.h; sourceTree = "<group>"; };
 		E4207DC2A2A3402DC43F5455 /* TSTLazyInjectionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTLazyInjectionBase.h; sourceTree = "<group>"; };
+		E4207DCB3A5E5FE83B67AAFB /* EEEBackwardCompatibleMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEBackwardCompatibleMapping.h; sourceTree = "<group>"; };
 		E4207F6A7B3FB53F08595018 /* TSTMappable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTMappable.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,9 +110,10 @@
 			isa = PBXGroup;
 			children = (
 				95BE7AAB1910EFAA004293F9 /* Dynamic property injection */,
+				95BE7AB21910EFAA004293F9 /* Injection mapping */,
+				E42073D9A4D8A61DA1760060 /* Backward compatibility */,
 				95BE7AB01910EFAA004293F9 /* EEEInjector.h */,
 				95BE7AB11910EFAA004293F9 /* EEEInjector.m */,
-				95BE7AB21910EFAA004293F9 /* Injection mapping */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -207,6 +211,15 @@
 				E42074327256A27606AFC73E /* Injection mapping */,
 			);
 			path = Specs;
+			sourceTree = "<group>";
+		};
+		E42073D9A4D8A61DA1760060 /* Backward compatibility */ = {
+			isa = PBXGroup;
+			children = (
+				E4207DCB3A5E5FE83B67AAFB /* EEEBackwardCompatibleMapping.h */,
+				E4207130578238DF84C49E45 /* EEEBackwardCompatibleMapping.m */,
+			);
+			path = "Backward compatibility";
 			sourceTree = "<group>";
 		};
 		E42074327256A27606AFC73E /* Injection mapping */ = {
@@ -372,6 +385,7 @@
 				95BE7AB81910EFAA004293F9 /* EEEInjector.m in Sources */,
 				95BE7AB91910EFAA004293F9 /* EEEMapping.m in Sources */,
 				95BE7AB71910EFAA004293F9 /* NSObject+EEELazyInjection.m in Sources */,
+				E420700C2D3925131598FBBB /* EEEBackwardCompatibleMapping.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

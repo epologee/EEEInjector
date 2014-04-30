@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "EEEBlockChainMapping.h"
+#import "EEEBackwardCompatibleMapping.h"
 
 #define injectClass eee_classWithInjector:[EEEInjector currentInjector]
 #define injectObject eee_objectFromInjector:[EEEInjector currentInjector]
@@ -33,5 +34,18 @@
 + (instancetype)eee_objectFromInjector:(EEEInjector *)injector;
 
 + (instancetype)eee_objectFromInjector:(EEEInjector *)injector withIdentifier:(NSString *)identifier;
+
+@end
+
+@interface EEEInjector (BackwardCompatibility)
+
+/// Use `injector.mapClass(...)` instead
+- (EEEBackwardCompatibleMapping *)mapClass:(Class)class DEPRECATED_ATTRIBUTE;
+
+/// Use `injector.mapClass(...)` instead
+- (EEEBackwardCompatibleMapping *)mapClass:(Class)class overwriteExisting:(__unused BOOL)overwriteExisting DEPRECATED_ATTRIBUTE;
+
+/// Use `injector.mapClassWithIdentifier(..., ...)` instead
+- (EEEBackwardCompatibleMapping *)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(__unused BOOL)overwriteExisting DEPRECATED_ATTRIBUTE;
 
 @end

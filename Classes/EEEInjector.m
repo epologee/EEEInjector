@@ -1,6 +1,7 @@
 #import "EEEInjector.h"
 #import "EEEIntrospectProperty.h"
 #import "EEEMapping.h"
+#import "EEEBackwardCompatibleMapping.h"
 
 @interface EEEInjector () <EEEMappingParent>
 
@@ -212,6 +213,25 @@ static EEEInjector *_currentInjector;
 + (NSString *)keyForProtocol:(Protocol *)proto withIdentifier:(NSString *)identifier
 {
     return [NSString stringWithFormat:@"%@xP@%@", NSStringFromProtocol(proto), identifier ? identifier : @""];
+}
+
+@end
+
+@implementation EEEInjector (BackwardCompatibility)
+
+- (EEEBackwardCompatibleMapping *)mapClass:(Class)class
+{
+    return [self mapClass:class overwriteExisting:YES];
+}
+
+- (EEEBackwardCompatibleMapping *)mapClass:(Class)class overwriteExisting:(BOOL)overwriteExisting
+{
+    return [self mapClass:class withIdentifier:nil overwriteExisting:overwriteExisting];
+}
+
+- (EEEBackwardCompatibleMapping *)mapClass:(Class)class withIdentifier:(NSString *)identifier overwriteExisting:(__unused BOOL)overwriteExisting
+{
+    return [[EEEBackwardCompatibleMapping alloc] initWithMapping:self.mapClassWithIdentifier(class, identifier)];
 }
 
 @end
