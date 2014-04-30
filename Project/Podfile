@@ -1,6 +1,6 @@
 platform :ios, '7.0'
 
-xcodeproj "Project/Injector"
+xcodeproj "Injector"
 
 target "Injector", :exclusive => true do
   # pod "EEEInjector"
