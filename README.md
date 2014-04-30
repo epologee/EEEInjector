@@ -1,7 +1,8 @@
 # EEEInjector
 
-<!--[![Version](http://cocoapod-badges.herokuapp.com/v/EEEInjector/badge.png)](http://cocoadocs.org/docsets/EEEInjector)
-[![Platform](http://cocoapod-badges.herokuapp.com/p/EEEInjector/badge.png)](http://cocoadocs.org/docsets/EEEInjector)-->
+[![Build Status](https://travis-ci.org/epologee/EEEInjector.svg)](https://travis-ci.org/epologee/EEEInjector)
+[![Version](http://cocoapod-badges.herokuapp.com/v/EEEInjector/badge.png)](http://cocoadocs.org/docsets/EEEInjector)
+[![Platform](http://cocoapod-badges.herokuapp.com/p/EEEInjector/badge.png)](http://cocoadocs.org/docsets/EEEInjector)
 
 f.k.a. [TwelveTwentyToolkit/TTTInjector](https://github.com/TwelveTwenty/TwelveTwentyToolkit-ObjC)
 
@@ -12,24 +13,23 @@ There are other existing frameworks that allow for dependency injection in Objec
 
 Several features:
 
-+ Runtime substitution of classes by specific subclasses
-+ Protocol-annotation based injection of properties
-+ Comparmentalized singletons (per injector instance)
++ Runtime substitution of class instances by instances of a subclasses
++ Class or protocol based injection mapping
++ Automatic lazy injection of `@dynamic` properties
++ Comparmentalized singletons (per injector instance, great for TDD purposes)
 + Preset object injections, including named objects
-+ Lazily instantiated objects
-+ 100% custom initializers after alloc
++ Block based injections that run the moment you access them
 + Single-serving injections (unmap after use)
-
-## Usage
-
-To test the example project; clone the repo, and run `pod install` from the Project directory first.
 
 ## Installation
 
-EEEInjector is available through [CocoaPods](http://cocoapods.org), to install
-it simply add the following line to your Podfile:
+EEEInjector is available through [CocoaPods](http://cocoapods.org), to install it simply run `pod install` after adding the following line to your `Podfile`:
 
     pod "EEEInjector"
+
+## Usage
+
+Have a look at the [Kiwi](https://github.com/allending/Kiwi) test [specs](InjectorTests/Specs) in the Xcode `Injector.xcworkspace` to see the features that the Injector currently supports.
 
 ## Author
 
@@ -37,5 +37,5 @@ Eric-Paul Lecluse, e@epologee.com
 
 ## License
 
-EEEInjector is available under the MIT license. See the LICENSE file for more info.
-
+This is free and unencumbered software released into the public domain. See the 
+LICENSE file for more info.

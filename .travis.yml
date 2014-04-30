@@ -1,9 +1,10 @@
-before_script:
-  - export LANG=en_US.UTF-8
 language: objective-c
+xcode_workspace: Injector.xcworkspace
+xcode_scheme: InjectorTests
+xcode_sdk: iphonesimulator7.0
+before_script:
+  - brew update
+  - brew upgrade xctool
 before_install:
-    - brew unlink xctool
-    - brew update
-    - brew install xctool
-    - gem install cocoapods -v '0.32.1'
-script: xctool -workspace Project/Injector.xcworkspace -scheme InjectorTests test -sdk iphonesimulator
+  - export LANG=en_US.UTF-8
+  - gem install cocoapods -v '0.32.1'
