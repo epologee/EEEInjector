@@ -1,5 +1,5 @@
 language: objective-c
-xcode_workspace: Project/Injector.xcworkspace
+xcode_workspace: Injector.xcworkspace
 xcode_scheme: InjectorTests
 xcode_sdk: iphonesimulator7.0
 before_script:
@@ -8,4 +8,3 @@ before_script:
 before_install:
   - export LANG=en_US.UTF-8
   - gem install cocoapods -v '0.32.1'
-  - cd Project; pod update
