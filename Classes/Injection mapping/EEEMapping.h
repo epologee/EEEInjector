@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "EEEBlockChainMapping.h"
 
-@interface EEEMapping : NSObject <EEEMappingParent>
+@interface EEEMapping : NSObject
 
 @property(nonatomic, strong, readonly) Class targetClass;
 @property(nonatomic, strong, readonly) id targetObject;

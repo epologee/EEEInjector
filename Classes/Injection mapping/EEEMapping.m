@@ -1,6 +1,6 @@
 #import "EEEMapping.h"
 
-@interface EEEMapping () <EEEMappingParent, EEEBlockChainMappingVoid>
+@interface EEEMapping () <EEEMappingParent>
 
 @property(nonatomic, strong) Class mappedClass;
 @property(nonatomic, strong) Protocol *mappedProtocol;
@@ -180,9 +180,9 @@
     };
 }
 
-- (id <EEEBlockChainMappingVoid> (^)(BOOL))removeAfterUse
+- (void (^)(BOOL))removeAfterUse
 {
-    return ^id <EEEBlockChainMappingVoid>(BOOL enable) {
+    return ^void(BOOL enable) {
         if (enable)
         {
             if (self.options & EEEBlockChainOptionKeepReference)
@@ -198,14 +198,12 @@
         {
             self.options ^= EEEBlockChainOptionRemoveAfterUse;
         }
-
-        return self;
     };
 }
 
-- (id <EEEBlockChainMappingVoid> (^)(BOOL))keepReference
+- (void (^)(BOOL))keepReference
 {
-    return ^id <EEEBlockChainMappingVoid>(BOOL enable) {
+    return ^void(BOOL enable) {
         if (enable)
         {
             if (self.options & EEEBlockChainOptionRemoveAfterUse)
@@ -221,8 +219,6 @@
         {
             self.options ^= EEEBlockChainOptionKeepReference;
         }
-
-        return self;
     };
 }
 

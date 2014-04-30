@@ -1,5 +1,8 @@
 #import <Foundation/Foundation.h>
 
+@protocol EEEBlockChainMappingStart, EEEBlockChainMapping, EEEBlockChainMappingEnd;
+@class EEEMapping;
+
 typedef enum
 {
     EEEBlockChainOptionNone = 0,
@@ -8,31 +11,7 @@ typedef enum
     EEEBlockChainOptionAll = EEEBlockChainOptionRemoveAfterUse | EEEBlockChainOptionKeepReference
 } EEEBlockChainOption;
 
-@protocol EEEBlockChainMappingVoid
-
-@end
-
-@protocol EEEBlockChainMappingEnd
-
-@property(nonatomic, readonly) id <EEEBlockChainMappingVoid> (^removeAfterUse)(BOOL enabled);
-
-@end
-
-@protocol EEEBlockChainMapping <EEEBlockChainMappingEnd>
-
-@property(nonatomic, readonly) id <EEEBlockChainMappingVoid> (^keepReference)(BOOL enabled);
-
-@end
-
-@protocol EEEBlockChainMappingStart <EEEBlockChainMapping>
-
-@property(nonatomic, readonly) id <EEEBlockChainMappingEnd> (^toObject)(id object);
-
-typedef id (^EEEInjectionBlock)();
-
-@property(nonatomic, readonly) id <EEEBlockChainMapping> (^toBlock)(EEEInjectionBlock block);
-
-@end
+#pragma - Block chain mapping API
 
 @protocol EEEClassBlockChainMappingStart <EEEBlockChainMappingStart>
 
@@ -46,7 +25,27 @@ typedef id (^EEEInjectionBlock)();
 
 @end
 
-@class EEEMapping;
+@protocol EEEBlockChainMappingStart <EEEBlockChainMapping>
+
+@property(nonatomic, readonly) id <EEEBlockChainMappingEnd> (^toObject)(id object);
+
+typedef id (^EEEInjectionBlock)();
+
+@property(nonatomic, readonly) id <EEEBlockChainMapping> (^toBlock)(EEEInjectionBlock block);
+
+@end
+
+@protocol EEEBlockChainMappingEnd
+
+@property(nonatomic, readonly) void (^removeAfterUse)(BOOL enabled);
+
+@end
+
+@protocol EEEBlockChainMapping <EEEBlockChainMappingEnd>
+
+@property(nonatomic, readonly) void (^keepReference)(BOOL enabled);
+
+@end
 
 @protocol EEEMappingParent <NSObject>
 

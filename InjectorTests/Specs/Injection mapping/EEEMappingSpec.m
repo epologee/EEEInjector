@@ -139,13 +139,17 @@ SPEC_BEGIN(EEEMappingSpec)
 
                     specify(^{
                         [[theBlock(^{
-                            ((id <EEEBlockChainMapping>) mapping.toSubclass([NSMutableArray class]).keepReference(YES)).removeAfterUse(YES);
+                            id <EEEBlockChainMapping> subclassMapping = (id <EEEBlockChainMapping>) mapping.toSubclass([NSMutableArray class]);
+                            subclassMapping.keepReference(YES);
+                            subclassMapping.removeAfterUse(YES);
                         }) should] raise];
                     });
 
                     specify(^{
                         [[theBlock(^{
-                            ((id <EEEBlockChainMapping>) mapping.toSubclass([NSMutableArray class]).removeAfterUse(YES)).keepReference(YES);
+                            id <EEEBlockChainMapping> subclassMapping = (id <EEEBlockChainMapping>) mapping.toSubclass([NSMutableArray class]);
+                            subclassMapping.removeAfterUse(YES);
+                            subclassMapping.keepReference(YES);
                         }) should] raise];
                     });
                 });
