@@ -25,6 +25,8 @@
 
 - (Class)classForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier;
 
+- (Class)classForMappedProtocol:(Protocol *)mappedProtocol withIdentifier:(NSString *)identifier;
+
 @end
 
 @interface NSObject (EEEInjector)
