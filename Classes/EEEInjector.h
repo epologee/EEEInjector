@@ -2,6 +2,11 @@
 #import "EEEBlockChainMapping.h"
 #import "EEEBackwardCompatibleMapping.h"
 
+#define EEEObjectMappedToClass(className) (className *)([[EEEInjector currentInjector] objectForMappedClass:[className class] withIdentifier:nil])
+#define EEEClassMappedToClass(className) ([[EEEInjector currentInjector] classForMappedClass:[className class] withIdentifier:nil])
+#define EEEObjectMappedToProtocol(protocolName) (id <protocolName>)([[EEEInjector currentInjector] objectForMappedProtocol:@protocol(protocolName) withIdentifier:nil])
+#define EEEClassMappedToProtocol(protocolName) ([[EEEInjector currentInjector] classForMappedProtocol:@protocol(protocolName) withIdentifier:nil])
+
 #define injectClass eee_classWithInjector:[EEEInjector currentInjector]
 #define injectObject eee_objectFromInjector:[EEEInjector currentInjector]
 #define injectObjectNamed(name) eee_objectFromInjector:[EEEInjector currentInjector] withIdentifier:name
