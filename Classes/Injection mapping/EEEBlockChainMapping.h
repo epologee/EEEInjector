@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
 
-@protocol EEEBlockChainMappingStart, EEEBlockChainMapping, EEEBlockChainMappingEnd;
 @class EEEMapping;
 
 typedef enum
@@ -13,15 +12,15 @@ typedef enum
 
 #pragma - Block chain mapping API
 
-@protocol EEEClassBlockChainMappingStart <EEEBlockChainMappingStart>
+@protocol EEEBlockChainMappingEnd
 
-@property(nonatomic, readonly) id <EEEBlockChainMapping> (^toSubclass)(Class subclass);
+@property(nonatomic, readonly) void (^removeAfterUse)(BOOL enabled);
 
 @end
 
-@protocol EEEProtocolBlockChainMappingStart <EEEBlockChainMappingStart>
+@protocol EEEBlockChainMapping <EEEBlockChainMappingEnd>
 
-@property(nonatomic, readonly) id <EEEBlockChainMapping> (^toConformingClass)(Class conformingClass);
+@property(nonatomic, readonly) void (^keepReference)(BOOL enabled);
 
 @end
 
@@ -35,15 +34,15 @@ typedef id (^EEEInjectionBlock)();
 
 @end
 
-@protocol EEEBlockChainMappingEnd
+@protocol EEEClassBlockChainMappingStart <EEEBlockChainMappingStart>
 
-@property(nonatomic, readonly) void (^removeAfterUse)(BOOL enabled);
+@property(nonatomic, readonly) id <EEEBlockChainMapping> (^toSubclass)(Class subclass);
 
 @end
 
-@protocol EEEBlockChainMapping <EEEBlockChainMappingEnd>
+@protocol EEEProtocolBlockChainMappingStart <EEEBlockChainMappingStart>
 
-@property(nonatomic, readonly) void (^keepReference)(BOOL enabled);
+@property(nonatomic, readonly) id <EEEBlockChainMapping> (^toConformingClass)(Class conformingClass);
 
 @end
 
