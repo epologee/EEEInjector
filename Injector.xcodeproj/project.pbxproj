@@ -24,9 +24,9 @@
 		E4207750128AAFDA9D6CE679 /* TSTHiddenClusterObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E420743259CD59DD5C2CCB38 /* TSTHiddenClusterObject.m */; };
 		E4207AE03441C41D526D7F4B /* NSObject+EEELazyInjectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E420740F621AD50232632E30 /* NSObject+EEELazyInjectionSpec.m */; };
 		E4207AFF8B42DCD4A55088D6 /* TSTLazyInjectionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207B0C8006C2597DFAD5BA /* TSTLazyInjectionBase.m */; };
+		E4207BAD0076344C1E96B7DF /* EEEAbstractClassCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = E42072A7E09EC9071CD2F76D /* EEEAbstractClassCluster.m */; };
 		E4207BC48EF80E548F813B28 /* TSTVisibleClusterObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207E2C5420CD858687C5E8 /* TSTVisibleClusterObject.m */; };
-		E4207BC73D67F6637E3A99E7 /* NSObject+EEEClassClusterInjection.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207BDB658823A2AD4074FC /* NSObject+EEEClassClusterInjection.m */; };
-		E4207C0DFBE90B1EFCD196ED /* NSObject+EEEClassClusterInjectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E42076DA9C2287A801C097ED /* NSObject+EEEClassClusterInjectionSpec.m */; };
+		E4207C0DFBE90B1EFCD196ED /* EEEAbstractClassClusterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E42076DA9C2287A801C097ED /* EEEAbstractClassClusterSpec.m */; };
 		E4207CF5F4980DFE8080373B /* TSTMappableConformingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E42073107B240D2A840E3659 /* TSTMappableConformingObject.m */; };
 		E4207D2368B3940B7624171C /* TSTLazyInjectionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207B4BAEAB4EB9CCF7E163 /* TSTLazyInjectionSub.m */; };
 /* End PBXBuildFile section */
@@ -78,17 +78,17 @@
 		E4207130578238DF84C49E45 /* EEEBackwardCompatibleMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEBackwardCompatibleMapping.m; sourceTree = "<group>"; };
 		E420720D096615F63DF7D5AA /* EEEMappingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEMappingSpec.m; sourceTree = "<group>"; };
 		E4207255819B42C7DD482058 /* TSTNonConformingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTNonConformingObject.m; sourceTree = "<group>"; };
+		E42072A7E09EC9071CD2F76D /* EEEAbstractClassCluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEAbstractClassCluster.m; sourceTree = "<group>"; };
 		E42073107B240D2A840E3659 /* TSTMappableConformingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTMappableConformingObject.m; sourceTree = "<group>"; };
-		E4207389D5033EE59E6D300C /* NSObject+EEEClassClusterInjection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+EEEClassClusterInjection.h"; sourceTree = "<group>"; };
+		E42073AA5C3C94B912BC3853 /* EEEAbstractClassCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEAbstractClassCluster.h; sourceTree = "<group>"; };
 		E420740F621AD50232632E30 /* NSObject+EEELazyInjectionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+EEELazyInjectionSpec.m"; sourceTree = "<group>"; };
 		E420743259CD59DD5C2CCB38 /* TSTHiddenClusterObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTHiddenClusterObject.m; sourceTree = "<group>"; };
-		E42076DA9C2287A801C097ED /* NSObject+EEEClassClusterInjectionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+EEEClassClusterInjectionSpec.m"; sourceTree = "<group>"; };
+		E42076DA9C2287A801C097ED /* EEEAbstractClassClusterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEAbstractClassClusterSpec.m; sourceTree = "<group>"; };
 		E420783B2D454E31904B329F /* TSTLazyInjectionSub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTLazyInjectionSub.h; sourceTree = "<group>"; };
 		E42078C92377B18D56D4122C /* TSTVisibleClusterObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTVisibleClusterObject.h; sourceTree = "<group>"; };
 		E42079599C40C16B8FD37454 /* TSTNonConformingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTNonConformingObject.h; sourceTree = "<group>"; };
 		E4207B0C8006C2597DFAD5BA /* TSTLazyInjectionBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTLazyInjectionBase.m; sourceTree = "<group>"; };
 		E4207B4BAEAB4EB9CCF7E163 /* TSTLazyInjectionSub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTLazyInjectionSub.m; sourceTree = "<group>"; };
-		E4207BDB658823A2AD4074FC /* NSObject+EEEClassClusterInjection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+EEEClassClusterInjection.m"; sourceTree = "<group>"; };
 		E4207C2778031A93C8973376 /* TSTMappableConformingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTMappableConformingObject.h; sourceTree = "<group>"; };
 		E4207DC2A2A3402DC43F5455 /* TSTLazyInjectionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTLazyInjectionBase.h; sourceTree = "<group>"; };
 		E4207DCB3A5E5FE83B67AAFB /* EEEBackwardCompatibleMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEBackwardCompatibleMapping.h; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 				E42078C92377B18D56D4122C /* TSTVisibleClusterObject.h */,
 				E420743259CD59DD5C2CCB38 /* TSTHiddenClusterObject.m */,
 				E42070651B14C2CECF069BC3 /* TSTHiddenClusterObject.h */,
-				E42076DA9C2287A801C097ED /* NSObject+EEEClassClusterInjectionSpec.m */,
+				E42076DA9C2287A801C097ED /* EEEAbstractClassClusterSpec.m */,
 			);
 			path = "Class cluster injection";
 			sourceTree = "<group>";
@@ -280,8 +280,8 @@
 		E4207F6ED678DDE3DF06B93B /* Class cluster injection */ = {
 			isa = PBXGroup;
 			children = (
-				E4207BDB658823A2AD4074FC /* NSObject+EEEClassClusterInjection.m */,
-				E4207389D5033EE59E6D300C /* NSObject+EEEClassClusterInjection.h */,
+				E42072A7E09EC9071CD2F76D /* EEEAbstractClassCluster.m */,
+				E42073AA5C3C94B912BC3853 /* EEEAbstractClassCluster.h */,
 			);
 			path = "Class cluster injection";
 			sourceTree = "<group>";
@@ -425,7 +425,7 @@
 				95BE7AB91910EFAA004293F9 /* EEEMapping.m in Sources */,
 				95BE7AB71910EFAA004293F9 /* NSObject+EEELazyInjection.m in Sources */,
 				E420700C2D3925131598FBBB /* EEEBackwardCompatibleMapping.m in Sources */,
-				E4207BC73D67F6637E3A99E7 /* NSObject+EEEClassClusterInjection.m in Sources */,
+				E4207BAD0076344C1E96B7DF /* EEEAbstractClassCluster.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +442,7 @@
 				E4207216CFB2D13F9D7C6AC3 /* TSTNonConformingObject.m in Sources */,
 				E4207BC48EF80E548F813B28 /* TSTVisibleClusterObject.m in Sources */,
 				E4207750128AAFDA9D6CE679 /* TSTHiddenClusterObject.m in Sources */,
-				E4207C0DFBE90B1EFCD196ED /* NSObject+EEEClassClusterInjectionSpec.m in Sources */,
+				E4207C0DFBE90B1EFCD196ED /* EEEAbstractClassClusterSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

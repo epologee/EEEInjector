@@ -1,7 +1,6 @@
 #import "EEEInjector.h"
 #import "EEEIntrospectProperty.h"
 #import "EEEMapping.h"
-#import "EEEBackwardCompatibleMapping.h"
 
 @interface EEEInjector () <EEEMappingParent>
 
@@ -110,7 +109,7 @@ static EEEInjector *_currentInjector;
 
 - (id)objectForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier
 {
-    EEEMapping *mapping = [self findOrCreateMappingForClass:mappedClass withIdentifier:identifier];
+    EEEMapping *mapping = [self findOrCreate:YES mappingForClass:mappedClass withIdentifier:identifier];
     return [mapping targetObject];
 }
 
@@ -122,7 +121,12 @@ static EEEInjector *_currentInjector;
 
 - (Class)classForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier
 {
-    EEEMapping *mapping = [self findOrCreateMappingForClass:mappedClass withIdentifier:identifier];
+    return [self classForMappedClass:mappedClass withIdentifier:identifier allowImplicit:YES];
+}
+
+- (Class)classForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier allowImplicit:(BOOL)allowImplicit
+{
+    EEEMapping *mapping = [self findOrCreate:allowImplicit mappingForClass:mappedClass withIdentifier:identifier];
     return [mapping targetClass];
 }
 
@@ -132,12 +136,12 @@ static EEEInjector *_currentInjector;
     return [mapping targetClass];
 }
 
-- (EEEMapping *)findOrCreateMappingForClass:(Class)mappedClass withIdentifier:(NSString *)identifier
+- (EEEMapping *)findOrCreate:(BOOL)create mappingForClass:(Class)mappedClass withIdentifier:(NSString *)identifier
 {
     NSString *key = [NSString keyForClass:mappedClass withIdentifier:identifier];
     EEEMapping *mapping = self[key];
 
-    if (!mapping)
+    if (!mapping && create)
     {
         key = [NSString keyForClass:mappedClass withIdentifier:nil];
         mapping = self[key];

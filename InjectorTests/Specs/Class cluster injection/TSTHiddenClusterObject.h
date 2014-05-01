@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "TSTVisibleClusterObject.h"
 
-@interface TSTHiddenClusterObject : NSObject
+@interface TSTHiddenClusterObject : TSTVisibleClusterObject
 @end

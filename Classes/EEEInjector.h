@@ -30,6 +30,8 @@
 
 - (Class)classForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier;
 
+- (Class)classForMappedClass:(Class)mappedClass withIdentifier:(NSString *)identifier allowImplicit:(BOOL)allowImplicit;
+
 - (Class)classForMappedProtocol:(Protocol *)mappedProtocol withIdentifier:(NSString *)identifier;
 
 @end
