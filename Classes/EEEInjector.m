@@ -126,6 +126,12 @@ static EEEInjector *_currentInjector;
     return [mapping targetClass];
 }
 
+- (Class)classForMappedProtocol:(Protocol *)mappedProtocol withIdentifier:(NSString *)identifier
+{
+    EEEMapping *mapping = [self findOrCreateMappingForProtocol:mappedProtocol withIdentifier:identifier];
+    return [mapping targetClass];
+}
+
 - (EEEMapping *)findOrCreateMappingForClass:(Class)mappedClass withIdentifier:(NSString *)identifier
 {
     NSString *key = [NSString keyForClass:mappedClass withIdentifier:identifier];

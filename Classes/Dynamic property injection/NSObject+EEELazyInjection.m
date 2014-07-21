@@ -3,6 +3,57 @@
 #import "EEEInjector.h"
 #import "EEEIntrospectProperty.h"
 
+SEL EEESetterForPropertyName(NSString *propertyName);
+
+/// Dynamically added setter `set<PropertyName>:`
+void EEESetPropertyValueAsAssociatedObject(id object, SEL _cmd, id value);
+
+/// Dynamically added getter `<PropertyName>`
+id EEEGetLazilyInjectedPropertyValue(id object, SEL _cmd);
+
+@implementation NSObject (EEELazyInjection)
+
++ (void)eee_setupLazyInjectionForDynamicProperties
+{
+    [[EEEIntrospectProperty propertiesOfClass:self] enumerateObjectsUsingBlock:^(EEEIntrospectProperty *property, NSUInteger idx, BOOL *stop) {
+        if (property.isObject && property.dynamicFlag)
+        {
+            NSAssert(property.customSetter == nil, @"Custom setters are not supported");
+            NSAssert(property.customGetter == nil, @"Custom getters are not supported");
+
+            SEL setter = EEESetterForPropertyName(property.name);
+            Method existingSetter = class_getInstanceMethod(self, setter);
+            BOOL requiresSetter = existingSetter == NULL;
+            if (!requiresSetter)
+            {
+                return;
+            }
+
+            BOOL addedSetter = class_addMethod(self, setter, (IMP) EEESetPropertyValueAsAssociatedObject, "v@:@");
+            if (!addedSetter)
+            {
+                return;
+            }
+
+            SEL getter = NSSelectorFromString(property.name);
+            Method existingGetter = class_getInstanceMethod(self, getter);
+            BOOL requiresGetter = existingGetter == NULL;
+            if (!requiresGetter)
+            {
+                return;
+            }
+
+            BOOL addedGetter = class_addMethod(self, getter, (IMP) EEEGetLazilyInjectedPropertyValue, "@@:");
+            if (!addedGetter)
+            {
+                return;
+            }
+        }
+    }];
+}
+
+@end
+
 NSString *EEEPropertyNameFromSetter(SEL setter) {
     NSString *selectorString = NSStringFromSelector(setter);
     if ([selectorString length] >= 5)
@@ -141,7 +192,6 @@ Class EEEClassForProperty(objc_property_t property, NSArray **protocols) {
     return typeClass;
 }
 
-/// Dynamically added setter `set<PropertyName>:`
 void EEESetPropertyValueAsAssociatedObject(id object, SEL _cmd, id value) {
     Class objectClass = [object class];
     NSString *propertyName = EEEPropertyNameFromSetter(_cmd);
@@ -158,7 +208,6 @@ void EEESetPropertyValueAsAssociatedObject(id object, SEL _cmd, id value) {
     }
 }
 
-/// Dynamically added getter `<PropertyName>`
 id EEEGetLazilyInjectedPropertyValue(id object, SEL _cmd) {
     NSString *propertyName = EEEPropertyNameFromGetter(_cmd);
     SEL associationKey = NSSelectorFromString(propertyName);
@@ -198,46 +247,3 @@ id EEEGetLazilyInjectedPropertyValue(id object, SEL _cmd) {
 
     return result;
 }
-
-@implementation NSObject (EEELazyInjection)
-
-+ (void)eee_setupLazyInjectionForDynamicProperties
-{
-    [[EEEIntrospectProperty propertiesOfClass:self] enumerateObjectsUsingBlock:^(EEEIntrospectProperty *property, NSUInteger idx, BOOL *stop) {
-        if (property.isObject && property.dynamicFlag)
-        {
-            NSAssert(property.customSetter == nil, @"Custom setters are not supported");
-            NSAssert(property.customGetter == nil, @"Custom getters are not supported");
-
-            SEL setter = EEESetterForPropertyName(property.name);
-            Method existingSetter = class_getInstanceMethod(self, setter);
-            BOOL requiresSetter = existingSetter == NULL;
-            if (!requiresSetter)
-            {
-                return;
-            }
-
-            BOOL addedSetter = class_addMethod(self, setter, (IMP) EEESetPropertyValueAsAssociatedObject, "v@:@");
-            if (!addedSetter)
-            {
-                return;
-            }
-
-            SEL getter = NSSelectorFromString(property.name);
-            Method existingGetter = class_getInstanceMethod(self, getter);
-            BOOL requiresGetter = existingGetter == NULL;
-            if (!requiresGetter)
-            {
-                return;
-            }
-
-            BOOL addedGetter = class_addMethod(self, getter, (IMP) EEEGetLazilyInjectedPropertyValue, "@@:");
-            if (!addedGetter)
-            {
-                return;
-            }
-        }
-    }];
-}
-
-@end
