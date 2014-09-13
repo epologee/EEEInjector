@@ -16,6 +16,7 @@
 		95DD392419067F0B00C68D0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD391419067F0A00C68D0B /* Foundation.framework */; };
 		95DD392619067F0B00C68D0B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD392519067F0B00C68D0B /* UIKit.framework */; };
 		95DD392919067F0B00C68D0B /* libInjector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD391119067F0A00C68D0B /* libInjector.a */; };
+		95E2BC6319C45D2600697685 /* TSTLazyInjectionCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E2BC6219C45D2600697685 /* TSTLazyInjectionCustom.m */; };
 		AAFD08D9DCCB4B60B7C04BE1 /* libPods-InjectorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 898AADA697BB40A6815FFBF7 /* libPods-InjectorTests.a */; };
 		E420700C2D3925131598FBBB /* EEEBackwardCompatibleMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207130578238DF84C49E45 /* EEEBackwardCompatibleMapping.m */; };
 		E4207216CFB2D13F9D7C6AC3 /* TSTNonConformingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E4207255819B42C7DD482058 /* TSTNonConformingObject.m */; };
@@ -66,6 +67,8 @@
 		95DD392219067F0B00C68D0B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		95DD392519067F0B00C68D0B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		95DD392C19067F0B00C68D0B /* InjectorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InjectorTests-Info.plist"; sourceTree = "<group>"; };
+		95E2BC6119C45D2600697685 /* TSTLazyInjectionCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTLazyInjectionCustom.h; sourceTree = "<group>"; };
+		95E2BC6219C45D2600697685 /* TSTLazyInjectionCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTLazyInjectionCustom.m; sourceTree = "<group>"; };
 		B7FD61DC809E468DBEB93756 /* Pods-InjectorTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InjectorTests.xcconfig"; path = "Pods/Pods-InjectorTests.xcconfig"; sourceTree = "<group>"; };
 		E4207130578238DF84C49E45 /* EEEBackwardCompatibleMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEBackwardCompatibleMapping.m; sourceTree = "<group>"; };
 		E420720D096615F63DF7D5AA /* EEEMappingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEEMappingSpec.m; sourceTree = "<group>"; };
@@ -242,6 +245,8 @@
 				E4207B4BAEAB4EB9CCF7E163 /* TSTLazyInjectionSub.m */,
 				E4207DC2A2A3402DC43F5455 /* TSTLazyInjectionBase.h */,
 				E4207B0C8006C2597DFAD5BA /* TSTLazyInjectionBase.m */,
+				95E2BC6119C45D2600697685 /* TSTLazyInjectionCustom.h */,
+				95E2BC6219C45D2600697685 /* TSTLazyInjectionCustom.m */,
 				E420740F621AD50232632E30 /* NSObject+EEELazyInjectionSpec.m */,
 			);
 			path = "Lazy injection";
@@ -396,6 +401,7 @@
 				E4207D2368B3940B7624171C /* TSTLazyInjectionSub.m in Sources */,
 				E4207AFF8B42DCD4A55088D6 /* TSTLazyInjectionBase.m in Sources */,
 				E4207AE03441C41D526D7F4B /* NSObject+EEELazyInjectionSpec.m in Sources */,
+				95E2BC6319C45D2600697685 /* TSTLazyInjectionCustom.m in Sources */,
 				E42074213FDDC8B4543E11DF /* EEEMappingSpec.m in Sources */,
 				E4207CF5F4980DFE8080373B /* TSTMappableConformingObject.m in Sources */,
 				E4207216CFB2D13F9D7C6AC3 /* TSTNonConformingObject.m in Sources */,
