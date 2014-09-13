@@ -18,35 +18,36 @@ id EEEGetLazilyInjectedPropertyValue(id object, SEL _cmd);
     [[EEEIntrospectProperty propertiesOfClass:self] enumerateObjectsUsingBlock:^(EEEIntrospectProperty *property, NSUInteger idx, BOOL *stop) {
         if (property.isObject && property.dynamicFlag)
         {
-            NSAssert(property.customSetter == nil, @"Custom setters are not supported");
-            NSAssert(property.customGetter == nil, @"Custom getters are not supported");
-
-            SEL setter = EEESetterForPropertyName(property.name);
-            Method existingSetter = class_getInstanceMethod(self, setter);
-            BOOL requiresSetter = existingSetter == NULL;
-            if (!requiresSetter)
+            BOOL accessorsRequired = property.customGetter == nil && property.customSetter == nil;
+            if (accessorsRequired)
             {
-                return;
-            }
-
-            BOOL addedSetter = class_addMethod(self, setter, (IMP) EEESetPropertyValueAsAssociatedObject, "v@:@");
-            if (!addedSetter)
-            {
-                return;
-            }
-
-            SEL getter = NSSelectorFromString(property.name);
-            Method existingGetter = class_getInstanceMethod(self, getter);
-            BOOL requiresGetter = existingGetter == NULL;
-            if (!requiresGetter)
-            {
-                return;
-            }
-
-            BOOL addedGetter = class_addMethod(self, getter, (IMP) EEEGetLazilyInjectedPropertyValue, "@@:");
-            if (!addedGetter)
-            {
-                return;
+                SEL setter = EEESetterForPropertyName(property.name);
+                Method existingSetter = class_getInstanceMethod(self, setter);
+                BOOL requiresSetter = existingSetter == NULL;
+                if (!requiresSetter)
+                {
+                    return;
+                }
+                
+                BOOL addedSetter = class_addMethod(self, setter, (IMP) EEESetPropertyValueAsAssociatedObject, "v@:@");
+                if (!addedSetter)
+                {
+                    return;
+                }
+                
+                SEL getter = NSSelectorFromString(property.name);
+                Method existingGetter = class_getInstanceMethod(self, getter);
+                BOOL requiresGetter = existingGetter == NULL;
+                if (!requiresGetter)
+                {
+                    return;
+                }
+                
+                BOOL addedGetter = class_addMethod(self, getter, (IMP) EEEGetLazilyInjectedPropertyValue, "@@:");
+                if (!addedGetter)
+                {
+                    return;
+                }
             }
         }
     }];
