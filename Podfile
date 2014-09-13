@@ -8,5 +8,5 @@ target "Injector", :exclusive => true do
 end
 
 target "InjectorTests", :exclusive => true do
-  pod "Kiwi/XCTest"
+  pod "Kiwi"
 end
