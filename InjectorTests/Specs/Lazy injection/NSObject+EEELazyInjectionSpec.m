@@ -1,7 +1,7 @@
 #import <Kiwi/Kiwi.h>
 #import "EEEInjector.h"
-//#import "TSTLazyInjectionBase.h"
-//#import "TSTLazyInjectionSub.h"
+#import "TSTLazyInjectionBase.h"
+#import "TSTLazyInjectionSub.h"
 #import "TSTLazyInjectionCustom.h"
 #import "TSTMappable.h"
 #import "TSTMappableConformingObject.h"
