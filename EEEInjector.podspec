@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "EEEInjector"
-  s.version      = "1.0.3"
+  s.version      = "1.0.4"
   s.summary      = "Dependency injection for the rest of us."
   # s.description  = ""
   s.homepage     = "https://github.com/epologee/EEEInjector"
