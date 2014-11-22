@@ -1,0 +1,11 @@
+platform :ios, '7.0'
+
+xcodeproj "InjectorExample"
+
+target "InjectorExample", :exclusive => true do
+  pod "EEEInjector", :path => "../"
+end
+
+target "InjectorExampleTests", :exclusive => true do
+  pod "Kiwi/XCTest"
+end
